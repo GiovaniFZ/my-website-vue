@@ -1,9 +1,11 @@
 <template>
   <header>
     <a class="first-anchor">Giv's website</a>
-    <a>About me</a>
-    <a>My skills</a>
-    <a>Contact</a>
+    <nav>
+      <a>About me</a>
+      <a>My skills</a>
+      <a>Contact</a>
+    </nav>
   </header>
 </template>
 
@@ -13,11 +15,27 @@ header {
   padding: 1rem;
   border-radius: 8px;
   display: flex;
-  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+
   a {
     color: #fff;
     float: right;
   }
-}
 
+  .first-anchor{
+    font-size: large;
+  }
+
+  a:hover {
+    color: #aeaeae;
+    cursor: pointer;
+  }
+
+  nav {
+    display: flex;
+    gap: 1rem;
+  }
+
+}
 </style>
