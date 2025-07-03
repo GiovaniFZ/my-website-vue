@@ -1,12 +1,28 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" :style="{ marginTop: isFirst ? '5rem' : '1rem' }">
     <div class="same-line">
-      <img src="https://github.com/GiovaniFZ.png" alt="Giovani's Github photo">
-      <h1>About me</h1>
+      <img :src="image" alt="Section icon">
+      <h1>{{ title }}</h1>
     </div>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis modi dolores voluptatem, minima quia nostrum voluptate consequatur sint. Id cum obcaecati enim voluptates nemo voluptatem saepe doloremque animi alias nam.</p>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis modi dolores voluptatem, minima quia nostrum
+      voluptate consequatur sint. Id cum obcaecati enim voluptates nemo voluptatem saepe doloremque animi alias nam.</p>
   </div>
 </template>
+
+<script setup>
+defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  image: {
+    type: String
+  },
+  isFirst: {
+    type: Boolean
+  }
+});
+</script>
 
 <style>
 .wrapper {

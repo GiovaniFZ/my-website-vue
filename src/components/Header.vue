@@ -11,19 +11,25 @@
 
 <style scoped>
 header {
-  background-color: #1E6448;
+  background-color: #166063;
   padding: 1rem;
+  top: 0;
+  left: 0;
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
+
 
   a {
     color: #fff;
     float: right;
   }
 
-  .first-anchor{
+  .first-anchor {
     font-size: large;
   }
 
