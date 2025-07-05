@@ -35,22 +35,30 @@ header {
 
 
   a {
-    color: #fff;
-    float: right;
+    text-decoration: none;
+    background-color: #6AD9CA;
+    border-radius: 4px;
+    color: #000;
+    padding: 0.2rem;
   }
 
   .first-anchor {
+    background: none;
+    color: #fff;
     font-size: large;
   }
 
   a:hover {
-    color: #aeaeae;
+    background-color: #55bfb1;
     cursor: pointer;
   }
 
   nav {
     display: flex;
     gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
 
     @media (max-width: 600px) {
       display: none;
@@ -61,6 +69,18 @@ header {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    padding: 0.4rem;
+    background-color: #6AD9CA;
+    color: #000;
+  }
+
+  select:hover {
+    background-color: #55bfb1;
+  }
+
+  select option {
+    background-color: #fff;
+    color: #000;
   }
 
 }
