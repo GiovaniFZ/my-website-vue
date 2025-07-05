@@ -4,9 +4,10 @@ import ptBR from "./locales/pt-br.json";
 
 export const i18n = createI18n({
     locale: 'English',
-    fallbackLocale: 'English',
+    fallbackLocale: 'Português',
+    sync: true,
     messages: {
         English: enUS,
         Português: ptBR
-    }
+    },
 })

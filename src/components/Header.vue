@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
+import { useI18n } from 'vue-i18n';
 
+const { locale, availableLocales } = useI18n();
 </script>
 
 <template>
   <header>
     <a class="first-anchor">Giv's website</a>
     <nav>
-      <RouterLink style="text-decoration: none;" to="/">About me</RouterLink>
-      <RouterLink style="text-decoration: none;" to="/skills">My skills</RouterLink>
-      <a>Contact</a>
-      <select>
-        Language
-        <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
+      <RouterLink style="text-decoration: none;" to="/">{{ $t('about') }}</RouterLink>
+      <RouterLink style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
+      <a>{{ $t('contact') }}</a>
+      <select v-model="locale">
+        <option v-for="loc in availableLocales" :key="`locale-${loc}`" :value="loc">{{ loc }}</option>
       </select>
     </nav>
   </header>

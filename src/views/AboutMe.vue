@@ -4,7 +4,7 @@ import RoundedSection from '../components/RoundedSection.vue';
 </script>
 
 <template>
-    <RoundedSection image="https://github.com/GiovaniFZ.png" title="About me" isFirst hasImage>
+    <RoundedSection image="https://github.com/GiovaniFZ.png" :title="$t('about')" isFirst hasImage>
         <p>{{ $t('aboutText') }}</p>
     </RoundedSection>
 </template>
