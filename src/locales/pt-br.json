@@ -1,0 +1,19 @@
+{
+    "about": "Sobre mim",
+    "aboutText": "Meu nome é Giovani, estudante de engenharia de software, estagiando e estudando em Minas Gerais, Brasil!",
+    "contact": "Contato",
+    "contactInfo": "Se você quiser falar comigo, você pode usar os links acima, ou escreva algo no campo abaixo para me enviar um email!",
+    "checkSocialLinks": "Ei, dá uma olhada nas minhas redes sociais!",
+    "welcome": "Olá, eu sou o Giovani! Bem-vindo ao meu site!",
+    "skills": "Habilidades",
+    "projects": "Projetos",
+    "send": "Enviar",
+    "myLast": "Meu status do Last.FM",
+    "myLastDescription": "Dê uma olhada na música que eu estava ouvindo:",
+    "lastPlayed": "Última música ouvida:",
+    "lastLink": "Clique aqui para ver a música no Last.FM",
+    "music": "Música",
+    "currentlyListening": "Eu estou ouvindo neste momento!",
+    "lastUpdate": "Última atualização: ",
+    "noRecentTracks": "Nenhuma música recente encontrada"
+}
