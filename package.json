@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "oh-vue-icons": "^1.0.0-rc3",
+    "swiper": "^11.2.10",
     "vue": "^3.5.17",
     "vue-i18n": "^11.1.9",
     "vue-router": "^4.5.1"
