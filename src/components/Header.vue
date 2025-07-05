@@ -51,6 +51,10 @@ header {
   nav {
     display: flex;
     gap: 1rem;
+
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
 
   select {
