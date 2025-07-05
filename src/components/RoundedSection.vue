@@ -20,8 +20,7 @@ defineProps({
       <v-icon scale="3" v-else name="bi-lightbulb-fill" />
       <h1>{{ title }}</h1>
     </div>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis modi dolores voluptatem, minima quia nostrum
-      voluptate consequatur sint. Id cum obcaecati enim voluptates nemo voluptatem saepe doloremque animi alias nam.</p>
+    <slot></slot>
   </div>
 </template>
 
@@ -50,7 +49,7 @@ defineProps({
   background-color: #166063;
   border-radius: 8px;
   padding: 3rem;
-  margin: 5rem 0.5rem 2rem 0.5rem;
+  margin: 5rem 0.2rem 2rem 0.2rem;
   animation: colors 3s;
 }
 
@@ -75,8 +74,8 @@ p {
 }
 
 img {
-  width: 20%;
-  height: 20%;
+  width: 17%;
+  height: 17%;
   border-radius: 50%;
   animation: goToTop 1.2s;
 }
