@@ -14,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="wrapper" :style="{ marginTop: isFirst ? '5rem' : '1rem' }">
+  <div class="wrapper">
     <div class="same-line">
       <img v-if="hasImage && image" :src="image" alt="Section icon" />
       <v-icon scale="3" v-else name="bi-lightbulb-fill" />
@@ -26,13 +26,32 @@ defineProps({
 </template>
 
 <style>
+@keyframes colors {
+  0% {
+    background-color: #458e78;
+  }
+
+  100% {
+    background-color: #166063;
+  }
+}
+
+@keyframes goToTop {
+  0% {
+    transform: translateY(100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
 .wrapper {
-  display: block;
-  background-color: #e9f5f3;
+  background-color: #166063;
   border-radius: 8px;
-  padding: 1rem;
-  margin: 1rem;
-  align-items: center;
+  padding: 3rem;
+  margin: 5rem 0.5rem 2rem 0.5rem;
+  animation: colors 3s;
 }
 
 .same-line {
@@ -42,18 +61,23 @@ defineProps({
 }
 
 h1 {
-  margin: 1rem;
+  margin: 5rem 3rem;
+  font-size: 6rem;
+  animation: goToTop 1.2s;
 }
 
 p {
   align-items: center;
   justify-content: center;
   display: flex;
+  font-size: 2rem;
+  animation: goToTop 1.2s;
 }
 
 img {
-  width: 5%;
-  height: 5%;
+  width: 20%;
+  height: 20%;
   border-radius: 50%;
+  animation: goToTop 1.2s;
 }
 </style>
