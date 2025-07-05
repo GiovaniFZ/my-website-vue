@@ -4,7 +4,7 @@ import RoundedSection from '../components/RoundedSection.vue';
 </script>
 
 <template>
-    <RoundedSection image="https://github.com/GiovaniFZ.png" title="About me" isFirst hasImage>
-        <p>{{ $t('aboutText') }}</p>
+    <RoundedSection title="My Skills">
+        <v-icon name="co-python" scale="7" />
     </RoundedSection>
 </template>

@@ -1,9 +1,14 @@
+<script setup lang="ts">
+import { RouterLink } from 'vue-router';
+
+</script>
+
 <template>
   <header>
     <a class="first-anchor">Giv's website</a>
     <nav>
-      <a>About me</a>
-      <a>My skills</a>
+      <RouterLink style="text-decoration: none;" to="/">About me</RouterLink>
+      <RouterLink style="text-decoration: none;" to="/skills">My skills</RouterLink>
       <a>Contact</a>
       <select>
         Language

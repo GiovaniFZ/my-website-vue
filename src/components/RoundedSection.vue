@@ -17,7 +17,7 @@ defineProps({
   <div class="wrapper">
     <div class="same-line">
       <img v-if="hasImage && image" :src="image" alt="Section icon" />
-      <v-icon scale="3" v-else name="bi-lightbulb-fill" />
+      <v-icon scale="7" v-else name="bi-lightbulb-fill" />
       <h1>{{ title }}</h1>
     </div>
     <slot></slot>
@@ -79,4 +79,9 @@ img {
   border-radius: 50%;
   animation: goToTop 1.2s;
 }
+
+v-icon {
+  animation: goToTop 1.2s;
+}
+
 </style>
