@@ -5,6 +5,13 @@
       <a>About me</a>
       <a>My skills</a>
       <a>Contact</a>
+      <select>
+        Language
+        <option>
+          English
+        </option>
+        <option>Português</option>
+      </select>
     </nav>
   </header>
 </template>
@@ -41,6 +48,12 @@ header {
   nav {
     display: flex;
     gap: 1rem;
+  }
+
+  select {
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
   }
 
 }

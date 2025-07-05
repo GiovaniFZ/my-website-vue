@@ -1,28 +1,29 @@
-<template>
-  <div class="wrapper" :style="{ marginTop: isFirst ? '5rem' : '1rem' }">
-    <div class="same-line">
-      <img :src="image" alt="Section icon">
-      <h1>{{ title }}</h1>
-    </div>
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis modi dolores voluptatem, minima quia nostrum
-      voluptate consequatur sint. Id cum obcaecati enim voluptates nemo voluptatem saepe doloremque animi alias nam.</p>
-  </div>
-</template>
-
 <script setup>
 defineProps({
   title: {
     type: String,
     required: true
   },
-  image: {
-    type: String
-  },
-  isFirst: {
-    type: Boolean
+  image: String,
+  isFirst: Boolean,
+  hasImage: {
+    type: Boolean,
+    default: false
   }
 });
 </script>
+
+<template>
+  <div class="wrapper" :style="{ marginTop: isFirst ? '5rem' : '1rem' }">
+    <div class="same-line">
+      <img v-if="hasImage && image" :src="image" alt="Section icon" />
+      <v-icon scale="3" v-else name="bi-lightbulb-fill" />
+      <h1>{{ title }}</h1>
+    </div>
+    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis modi dolores voluptatem, minima quia nostrum
+      voluptate consequatur sint. Id cum obcaecati enim voluptates nemo voluptatem saepe doloremque animi alias nam.</p>
+  </div>
+</template>
 
 <style>
 .wrapper {
@@ -41,7 +42,7 @@ defineProps({
 }
 
 h1 {
-  margin: 2rem;
+  margin: 1rem;
 }
 
 p {
