@@ -12,10 +12,7 @@ import { RouterLink } from 'vue-router';
       <a>Contact</a>
       <select>
         Language
-        <option>
-          English
-        </option>
-        <option>Português</option>
+        <option v-for="locale in $i18n.availableLocales" :key="`locale-${locale}`" :value="locale">{{ locale }}</option>
       </select>
     </nav>
   </header>

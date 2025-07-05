@@ -3,10 +3,10 @@ import enUS from "./locales/en-us.json";
 import ptBR from "./locales/pt-br.json";
 
 export const i18n = createI18n({
-    locale: 'en',
-    fallbackLocale: 'en',
+    locale: 'English',
+    fallbackLocale: 'English',
     messages: {
-        en: enUS,
-        pt: ptBR
+        English: enUS,
+        Português: ptBR
     }
 })
