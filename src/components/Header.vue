@@ -1,17 +1,25 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router';
 import { useI18n } from 'vue-i18n';
+import Sidebar from './Sidebar.vue';
+import { ref } from 'vue';
 
 const { locale, availableLocales } = useI18n();
+const isOpen = ref(false);
+function handleClick() {
+  isOpen.value = true;
+}
 </script>
 
 <template>
+  <Sidebar :is-open="isOpen" @close="isOpen = false" />
   <header>
+    <button class="menu-icon" @click="handleClick">≡</button>
     <a class="first-anchor">Giv's website</a>
     <nav>
       <RouterLink style="text-decoration: none;" to="/">{{ $t('about') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
-      <a>{{ $t('contact') }}</a>
+      <!-- <a>{{ $t('contact') }}</a> -->
       <select v-model="locale">
         <option v-for="loc in availableLocales" :key="`locale-${loc}`" :value="loc">{{ loc }}</option>
       </select>
@@ -42,10 +50,26 @@ header {
     padding: 0.2rem;
   }
 
+  .menu-icon {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: large;
+    display: none;
+
+    @media(max-width: 600px) {
+      display: block;
+    }
+  }
+
   .first-anchor {
     background: none;
     color: #fff;
     font-size: large;
+
+    @media(max-width: 600px) {
+      margin: 0 auto;
+    }
   }
 
   a:hover {
