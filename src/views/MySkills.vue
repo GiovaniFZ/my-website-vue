@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import RoundedSection from '../components/RoundedSection.vue';
 </script>

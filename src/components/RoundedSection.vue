@@ -50,7 +50,7 @@ defineProps({
   border-radius: 8px;
   padding: 3rem;
   margin: 5rem 0.2rem 2rem 0.2rem;
-  animation: colors 3s;
+  animation: colors 2s;
   @media(max-width: 800px) {
     padding: 0.2rem;
     margin: 6rem 0.2rem 1rem 0.2rem;
