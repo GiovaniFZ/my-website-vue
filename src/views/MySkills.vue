@@ -5,20 +5,21 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import RoundedSection from '../components/RoundedSection.vue';
+import { Navigation, Pagination } from 'swiper/modules';
 </script>
 
 <template>
     <RoundedSection :title="$t('skills')">
         <swiper class="mySwiper" :slides-per-view="5" :space-between="2" :navigation="true"
-        :pagination="{ clickable: true }">
-        <swiper-slide>
-            <v-icon name="co-android" scale="5" />
-            <p>Android</p>
-        </swiper-slide>
-        <swiper-slide>
-            <v-icon name="co-java" scale="5" />
-            <p>Java</p>
-        </swiper-slide>
+            :pagination="{ clickable: true }" :modules="[Navigation, Pagination]">
+            <swiper-slide>
+                <v-icon name="co-android" scale="5" />
+                <p>Android</p>
+            </swiper-slide>
+            <swiper-slide>
+                <v-icon name="co-java" scale="5" />
+                <p>Java</p>
+            </swiper-slide>
             <swiper-slide>
                 <v-icon name="co-python" scale="5" />
                 <p>Python</p>
@@ -33,7 +34,7 @@ import RoundedSection from '../components/RoundedSection.vue';
             </swiper-slide>
             <swiper-slide>
                 <v-icon name="co-react" scale="5" />
-                <p>Vue</p>
+                <p>React</p>
             </swiper-slide>
             <swiper-slide>
                 <v-icon name="co-windows" scale="5" />
