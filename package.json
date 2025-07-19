@@ -1,7 +1,7 @@
 {
   "name": "givs-website-vue",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.10.0",
     "oh-vue-icons": "^1.0.0-rc3",
     "swiper": "^11.2.10",
     "vue": "^3.5.17",

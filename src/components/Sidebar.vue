@@ -27,6 +27,9 @@ defineProps({
                 <li>
                     <RouterLink style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
                 </li>
+                <li>
+                    <RouterLink style="text-decoration: none;" to="/music">{{ $t('music') }}</RouterLink>
+                </li>
             </ul>
         </nav>
     </aside>

@@ -9,7 +9,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 </script>
 
 <template>
-    <RoundedSection :title="$t('skills')">
+    <RoundedSection :title="$t('skills')" :iconName="'bi-lightbulb-fill'">
         <swiper class="mySwiper" :slides-per-view="5" :space-between="2" :navigation="true"
             :pagination="{ clickable: true }" :modules="[Navigation, Pagination]">
             <swiper-slide>

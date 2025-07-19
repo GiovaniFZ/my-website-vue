@@ -5,6 +5,7 @@ defineProps({
     required: true
   },
   image: String,
+  iconName: String,
   isFirst: Boolean,
   hasImage: {
     type: Boolean,
@@ -17,7 +18,7 @@ defineProps({
   <div class="wrapper">
     <div class="same-line">
       <img v-if="hasImage && image" :src="image" alt="Section icon" />
-      <v-icon scale="7" v-else name="bi-lightbulb-fill" />
+      <v-icon scale="7" v-else :name="iconName" />
       <h1>{{ title }}</h1>
     </div>
     <slot></slot>
