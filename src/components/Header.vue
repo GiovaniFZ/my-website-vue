@@ -20,6 +20,7 @@ function handleClick() {
       <RouterLink style="text-decoration: none;" to="/">{{ $t('about') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/music">{{ $t('music') }}</RouterLink>
+      <RouterLink style="text-decoration: none;" to="/contact">{{ $t('contact') }}</RouterLink>
       <select v-model="locale">
         <option v-for="loc in availableLocales" :key="`locale-${loc}`" :value="loc">{{ loc }}</option>
       </select>
