@@ -9,6 +9,18 @@ import RoundedSection from '../components/RoundedSection.vue';
     gap: 20px;
     margin-top: 20px;
 }
+
+.contact-icons a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.contact-icons a:hover {
+    color: #6AD9CA;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
 </style>
 
 <template>
@@ -19,6 +31,9 @@ import RoundedSection from '../components/RoundedSection.vue';
             </a>
             <a href="https://github.com/GiovaniFZ" target="_blank" rel="noopener noreferrer">
                 <v-icon name="bi-github" scale="5" />
+            </a>
+            <a href="https://instagram.com/giovani.finazzi" target="_blank" rel="noopener noreferrer">
+                <v-icon name="bi-instagram" scale="5" />
             </a>
         </div>
     </RoundedSection>
