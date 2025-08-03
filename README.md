@@ -14,10 +14,10 @@ Olá, meu nome é Giovani (também conhecido como Giv). Esse é meu site pessoal
 
 ## 📝 Sobre o Projeto
 
-Este site foi criado para apresentar minha identidade profissional de forma interativa e moderna. Através dele, você pode conhecer:
+Este site foi criado para apresentar:
 
-- **Quem eu sou** - Uma apresentação pessoal autêntica
-- **Minhas habilidades técnicas** - Tecnologias e ferramentas que domino
+- **Quem eu sou** - Minha apresentação pessoal
+- **Minhas habilidades técnicas** - Quais tecnologias e ferramentas eu sei utilizar.
 - **Meus gostos musicais** - Últimas músicas que escutei via Last.fm
 - **Como me contatar** - Formas de entrar em contato
 
@@ -55,11 +55,7 @@ src/
 ├── interfaces/         # Tipagens TypeScript
 └── i18n/              # Arquivos de tradução
 ```
-
-## 🎯 Objetivo
-
-Este projeto representa não apenas minhas habilidades técnicas, mas também minha personalidade e paixão pelo desenvolvimento web. Cada seção foi cuidadosamente projetada para oferecer uma experiência única ao visitante.
-
+Obrigado por visitar o repositório, não esqueça de dar uma olhada também no site!
 ---
 
 Desenvolvido com ❤️ por **Giv**
