@@ -22,7 +22,3 @@ export interface Track {
     streamable: string;
     url: string;
 }
-
-interface LastFmResponse {
-    track: Track;
-}
