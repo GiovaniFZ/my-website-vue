@@ -50,8 +50,9 @@ import { Navigation, Pagination } from 'swiper/modules';
 
 <style>
 .mySwiper {
-    background-color: rgb(96, 168, 157);
+    background-color: rgb(0, 79, 67);
     border-radius: 8px;
+    padding: 1.5rem;
 }
 
 .swiper-slide {
@@ -60,5 +61,21 @@ import { Navigation, Pagination } from 'swiper/modules';
     align-items: center;
     justify-content: center;
     line-height: 0;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: #6AD9CA;
+}
+
+.swiper-pagination-bullet {
+    background: #166063;
+    opacity: 0.7;
+    margin: 1rem;
+}
+
+.swiper-pagination-bullet-active {
+    background: #6AD9CA;
+    opacity: 1;
 }
 </style>
