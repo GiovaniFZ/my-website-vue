@@ -21,6 +21,10 @@ import { Navigation, Pagination } from 'swiper/modules';
                 <p>Java</p>
             </swiper-slide>
             <swiper-slide>
+                <v-icon name="co-linux" scale="5" />
+                <p>Linux</p>
+            </swiper-slide>
+            <swiper-slide>
                 <v-icon name="co-python" scale="5" />
                 <p>Python</p>
             </swiper-slide>
