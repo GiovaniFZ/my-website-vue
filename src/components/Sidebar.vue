@@ -16,35 +16,38 @@ defineProps({
 </script>
 
 <template>
-  <Transition name="sidebar">
-    <aside v-if="isOpen">
-        <button @click="handleClick">X</button>
-        <nav>
-            <ul>
-                <li>
-                    <RouterLink style="text-decoration: none;" to="/">{{ $t('about') }}</RouterLink>
-                </li>
-                <li>
-                    <RouterLink style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
-                </li>
-                <li>
-                    <RouterLink style="text-decoration: none;" to="/music">{{ $t('music') }}</RouterLink>
-                </li>
-                <li>
-                    <RouterLink style="text-decoration: none;" to="/contact">{{ $t('contact') }}</RouterLink>
-                </li>
-            </ul>
-        </nav>
-    </aside>
-  </Transition>
+    <Transition name="sidebar">
+        <aside v-if="isOpen">
+            <button @click="handleClick">X</button>
+            <nav>
+                <ul>
+                    <li>
+                        <RouterLink style="text-decoration: none;" to="/">{{ $t('about') }}</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink style="text-decoration: none;" to="/music">{{ $t('music') }}</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink style="text-decoration: none;" to="/contact">{{ $t('contact') }}</RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink style="text-decoration: none;" to="/about">{{ $t('about') }}</RouterLink>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+    </Transition>
 </template>
 
 <style>
-
 @keyframes slideIn {
     from {
         transform: translateX(-100%);
     }
+
     to {
         transform: translateX(0);
     }
@@ -54,6 +57,7 @@ defineProps({
     from {
         transform: translateX(0);
     }
+
     to {
         transform: translateX(-100%);
     }
@@ -68,12 +72,12 @@ aside {
     left: 0;
     z-index: 1000;
     width: 150px;
-    box-shadow: 2px 0 16px rgba(0,0,0,0.18);
+    box-shadow: 2px 0 16px rgba(0, 0, 0, 0.18);
     padding: 2rem 1rem 1rem 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    transition: transform 0.3s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
+    transition: transform 0.3s cubic-bezier(.4, 2, .6, 1), box-shadow 0.2s;
     border-top-right-radius: 18px;
     border-bottom-right-radius: 18px;
 }
@@ -90,9 +94,10 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: background 0.2s, color 0.2s;
 }
+
 button:hover {
     background: #6AD9CA;
     color: #124344;
@@ -120,15 +125,18 @@ li a {
     transition: background 0.2s, color 0.2s;
     display: block;
 }
-li a:hover, li a.router-link-exact-active {
+
+li a:hover,
+li a.router-link-exact-active {
     background: #6AD9CA;
     color: #124344;
 }
 
 .sidebar-enter-active {
-  animation: slideIn 0.3s ease-out;
+    animation: slideIn 0.3s ease-out;
 }
+
 .sidebar-leave-active {
-  animation: slideOut 0.3s ease-in;
+    animation: slideOut 0.3s ease-in;
 }
 </style>
