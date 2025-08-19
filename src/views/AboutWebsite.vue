@@ -5,6 +5,6 @@ import RoundedSection from '../components/RoundedSection.vue';
 
 <template>
     <RoundedSection :title="$t('aboutThisWebsite')">
-        <p>Soon!</p>
+        <p>{{ $t('aboutWebText') }}</p>
     </RoundedSection>
 </template>
