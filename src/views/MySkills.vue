@@ -11,7 +11,13 @@ import { Navigation, Pagination } from 'swiper/modules';
 <template>
     <RoundedSection :title="$t('skills')" :iconName="'bi-lightbulb-fill'">
         <swiper class="mySwiper" :slides-per-view="5" :space-between="2" :navigation="true"
-            :pagination="{ clickable: true }" :modules="[Navigation, Pagination]">
+            :pagination="{ clickable: true }" :modules="[Navigation, Pagination]" :breakpoints="{
+                1200: { slidesPerView: 5 },
+                1000: { slidesPerView: 4 },
+                300: { slidesPerView: 3 },
+                200: { slidesPerView: 2 },
+                0: { slidesPerView: 1 }
+            }">
             <swiper-slide>
                 <v-icon name="co-android" scale="5" />
                 <p>Android</p>
