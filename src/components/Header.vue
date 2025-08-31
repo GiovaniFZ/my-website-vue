@@ -31,7 +31,7 @@ function handleClick() {
 
 <style scoped>
 header {
-  background-color: #166063;
+  background-color: #123435;
   padding: 1rem;
   top: 0;
   left: 0;
