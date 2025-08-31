@@ -43,6 +43,11 @@ header {
   width: 100%;
   box-sizing: border-box;
 
+  @media (max-width: 800px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
 
   a {
     text-decoration: none;
@@ -59,7 +64,7 @@ header {
     font-size: large;
     display: none;
 
-    @media(max-width: 600px) {
+    @media(max-width: 800px) {
       display: block;
     }
   }
@@ -69,7 +74,7 @@ header {
     color: #fff;
     font-size: large;
 
-    @media(max-width: 600px) {
+    @media(max-width: 800px) {
       margin: 0 auto;
     }
   }
@@ -86,7 +91,7 @@ header {
     justify-content: center;
     margin: 0 auto;
 
-    @media (max-width: 600px) {
+    @media (max-width: 800px) {
       display: none;
     }
   }
