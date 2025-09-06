@@ -17,5 +17,6 @@
     "music": "Music",
     "currentlyListening": "I'm currently listening to it!",
     "lastUpdate": "Last update: ",
-    "noRecentTracks": "No recent tracks found"
+    "noRecentTracks": "No recent tracks found",
+    "my-projects": "My Projects"
 }

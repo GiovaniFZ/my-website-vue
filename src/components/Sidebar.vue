@@ -34,6 +34,9 @@ defineProps({
                         <RouterLink style="text-decoration: none;" to="/contact">{{ $t('contact') }}</RouterLink>
                     </li>
                     <li>
+                        <RouterLink style="text-decoration: none;" to="/my-projects">{{ $t('my-projects') }}</RouterLink>
+                    </li>
+                    <li>
                         <RouterLink style="text-decoration: none;" to="/about">{{ $t('aboutThisWebsite') }}</RouterLink>
                     </li>
                 </ul>
