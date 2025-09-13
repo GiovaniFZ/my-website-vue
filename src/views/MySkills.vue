@@ -6,6 +6,23 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import RoundedSection from '../components/RoundedSection.vue';
 import { Navigation, Pagination } from 'swiper/modules';
+
+type Skill = {
+  name: string;
+  icon: string;
+  link?: string;
+};
+
+const skills: Skill[] = [
+  { name: 'Android', icon: 'co-android', link: 'https://android.com/' },
+  { name: 'Java', icon: 'co-java', link: 'https://www.oracle.com/java/' },
+  { name: 'Linux', icon: 'co-linux', link: 'https://www.kernel.org/' },
+  { name: 'Python', icon: 'co-python', link: 'https://www.python.org/' },
+  { name: 'MongoDB', icon: 'si-mongodb', link: 'https://www.mongodb.com/' },
+  { name: 'Vue', icon: 'co-vue-js', link: 'https://vuejs.org/' },
+  { name: 'React', icon: 'co-react', link: 'https://react.dev/' },
+  { name: 'Windows', icon: 'co-windows', link: 'https://www.microsoft.com/windows' },
+];
 </script>
 
 <template>
@@ -18,37 +35,21 @@ import { Navigation, Pagination } from 'swiper/modules';
         200: { slidesPerView: 2 },
         0: { slidesPerView: 1 }
       }">
-      <swiper-slide>
-        <v-icon name="co-android" scale="5" />
-        <p>Android</p>
-      </swiper-slide>
-      <swiper-slide>
-        <v-icon name="co-java" scale="5" />
-        <p>Java</p>
-      </swiper-slide>
-      <swiper-slide>
-        <v-icon name="co-linux" scale="5" />
-        <p>Linux</p>
-      </swiper-slide>
-      <swiper-slide>
-        <v-icon name="co-python" scale="5" />
-        <p>Python</p>
-      </swiper-slide>
-      <swiper-slide>
-        <v-icon name="si-mongodb" scale="5" />
-        <p>MongoDB</p>
-      </swiper-slide>
-      <swiper-slide>
-        <v-icon name="co-vue-js" scale="5" />
-        <p>Vue</p>
-      </swiper-slide>
-      <swiper-slide>
-        <v-icon name="co-react" scale="5" />
-        <p>React</p>
-      </swiper-slide>
-      <swiper-slide>
-        <v-icon name="co-windows" scale="5" />
-        <p>Windows</p>
+      <swiper-slide v-for="skill in skills" :key="skill.name">
+        <a
+          v-if="skill.link"
+          class="skill-link"
+          :href="skill.link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <v-icon :name="skill.icon" scale="5" />
+          <p>{{ skill.name }}</p>
+        </a>
+        <div v-else class="skill-card">
+          <v-icon :name="skill.icon" scale="5" />
+          <p>{{ skill.name }}</p>
+        </div>
       </swiper-slide>
     </swiper>
   </RoundedSection>
@@ -67,6 +68,16 @@ import { Navigation, Pagination } from 'swiper/modules';
   align-items: center;
   justify-content: center;
   line-height: 0;
+}
+
+.swiper-slide .skill-link,
+.swiper-slide .skill-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: inherit;
+  text-decoration: none;
 }
 
 .swiper-button-next,

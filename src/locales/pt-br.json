@@ -1,6 +1,8 @@
 {
   "about": "Sobre mim",
-  "aboutMeText": "Olá, meu nome é Giovani. Atualmente estou estudando engenharia de software, e estagiando em Minas Gerais, Brasil! Gosto muito de desenvolvimento web e estou sempre aberto para contribuir em projetos de código aberto.",
+  "greeting": "Olá,",
+  "introduction": "Eu sou Giovani",
+  "aboutMeText": "Sou estudante de engenharia de software, atualmente estagiando em Minas Gerais, Brasil! Gosto muito de desenvolvimento web e estou sempre aberto para contribuir em projetos de código aberto.",
   "aboutWebText": "Olá, este é o meu site pessoal. Eu o desenvolvi usando Vue 3 com TypeScript, e estou utilizando o Vite como ferramenta de build. Este site é uma vitrine das minhas habilidades, projetos e interesses em desenvolvimento.",
   "aboutThisWebsite": "Sobre este site",
   "contact": "Contato",

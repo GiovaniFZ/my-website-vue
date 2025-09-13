@@ -15,7 +15,7 @@ function handleClick() {
   <Sidebar :is-open="isOpen" @close="isOpen = false" />
   <header>
     <button class="menu-icon" @click="handleClick">≡</button>
-    <a class="first-anchor">Giv's website</a>
+    <a class="first-anchor" href="/">Giv's Website</a>
     <nav>
       <RouterLink style="text-decoration: none;" to="/">{{ $t('about') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
@@ -23,10 +23,10 @@ function handleClick() {
       <RouterLink style="text-decoration: none;" to="/contact">{{ $t('contact') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/my-projects">{{ $t('my-projects') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/about">{{ $t('aboutThisWebsite') }}</RouterLink>
-      <select v-model="locale">
-        <option v-for="loc in availableLocales" :key="`locale-${loc}`" :value="loc">{{ loc }}</option>
-      </select>
     </nav>
+    <select v-model="locale">
+      <option v-for="loc in availableLocales" :key="`locale-${loc}`" :value="loc">{{ loc }}</option>
+    </select>
   </header>
 </template>
 
@@ -44,11 +44,10 @@ header {
   width: 100%;
   box-sizing: border-box;
 
-  @media (max-width: 800px) {
+  @media (max-width: 870px) {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
-
 
   a {
     text-decoration: none;
@@ -56,6 +55,8 @@ header {
     border-radius: 4px;
     color: #000;
     padding: 0.2rem;
+    padding-left: 7px;
+    padding-right: 7px;
   }
 
   .menu-icon {
@@ -65,7 +66,7 @@ header {
     font-size: large;
     display: none;
 
-    @media(max-width: 800px) {
+    @media(max-width: 870px) {
       display: block;
     }
   }
@@ -74,8 +75,10 @@ header {
     background: none;
     color: #fff;
     font-size: large;
+    padding-left: 10px;
+    padding-right: 10px;
 
-    @media(max-width: 800px) {
+    @media(max-width: 870px) {
       margin: 0 auto;
     }
   }
@@ -92,7 +95,7 @@ header {
     justify-content: center;
     margin: 0 auto;
 
-    @media (max-width: 800px) {
+    @media (max-width: 870px) {
       display: none;
     }
   }
@@ -114,6 +117,5 @@ header {
     background-color: #fff;
     color: #000;
   }
-
 }
 </style>

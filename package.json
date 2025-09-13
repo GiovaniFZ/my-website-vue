@@ -9,9 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^1.12.1",
     "oh-vue-icons": "^1.0.0-rc3",
-    "swiper": "^11.2.10",
+    "swiper": "^12.0.1",
     "vue": "^3.5.21",
     "vue-i18n": "^11.1.12",
     "vue-router": "^4.5.1"

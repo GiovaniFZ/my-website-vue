@@ -1,21 +1,15 @@
-import { createMemoryHistory, createRouter } from 'vue-router'
-import AboutMe from './views/AboutMe.vue'
-import MySkills from './views/MySkills.vue'
-import Music from './views/Music.vue'
-import Contact from './views/Contact.vue'
-import AboutWebsite from './views/AboutWebsite.vue'
-import MyProjects from './views/MyProjects.vue'
+import { createWebHistory, createRouter } from 'vue-router'
 
 const routes = [
-  { path: '/', component: AboutMe },
-  { path: '/skills', component: MySkills },
-  { path: '/music', component: Music },
-  { path: '/contact', component: Contact },
-  { path: '/about', component: AboutWebsite },
-  { path: '/my-projects', component: MyProjects },
+  { path: '/', component: () => import('./views/AboutMe.vue') },
+  { path: '/skills', component: () => import('./views/MySkills.vue') },
+  { path: '/music', component: () => import('./views/Music.vue') },
+  { path: '/contact', component: () => import('./views/Contact.vue') },
+  { path: '/about', component: () => import('./views/AboutWebsite.vue') },
+  { path: '/my-projects', component: () => import('./views/MyProjects.vue') },
 ]
 
 export const router = createRouter({
-  history: createMemoryHistory(),
+  history: createWebHistory(),
   routes,
 })
