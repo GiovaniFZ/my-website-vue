@@ -20,6 +20,12 @@ import RoundedSection from '../components/RoundedSection.vue';
   transform: scale(1.1);
   transition: all 0.3s ease;
 }
+
+@media (max-width: 870px) {
+  .contact-icons v-icon {
+    font-size: 3em !important;
+  }
+}
 </style>
 
 <template>

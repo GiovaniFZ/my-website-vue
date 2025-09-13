@@ -66,11 +66,12 @@ defineProps({
   background-color: #166063;
   border-radius: 8px;
   padding: 3rem;
-  margin: 5rem 0.2rem 2rem 0.2rem;
+  box-sizing: border-box;
+  margin: 5rem 0.75rem 2rem 0.75rem;
   animation: colors 800ms ease-out both;
   @media(max-width: 870px) {
-    padding: 0.2rem;
-    margin: 6rem 0.2rem 1rem 0.2rem;
+    padding: 1rem;
+    margin: 6rem 0.75rem 1.25rem 0.75rem;
   }
 }
 
@@ -108,6 +109,8 @@ defineProps({
 
   @media(max-width: 870px) {
     font-size: 1.5rem;
+    display: block;
+    text-align: center;
   }
 }
 
@@ -186,6 +189,12 @@ v-icon {
   v-icon,
   :slotted(p) {
     animation: none !important;
+  }
+}
+
+@media (max-width: 870px) {
+  .same-line > v-icon {
+    font-size: 4em !important;
   }
 }
 </style>

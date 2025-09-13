@@ -1,5 +1,5 @@
 {
-  "about": "About Me",
+  "home": "Home",
   "greeting": "Hello,",
   "introduction": "I'm Giovani",
   "aboutWebText": "Hi, this is my personal website. I've made in Vue 3 with TypeScript, and I'm using Vite as the build tool. This site is a showcase of my skills, projects, and interests in development.",

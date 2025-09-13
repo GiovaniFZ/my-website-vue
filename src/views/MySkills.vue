@@ -27,7 +27,7 @@ const skills: Skill[] = [
 
 <template>
   <RoundedSection :title="$t('skills')" :iconName="'bi-lightbulb-fill'">
-    <swiper class="mySwiper" :slides-per-view="5" :space-between="2" :navigation="true"
+    <swiper class="mySwiper" :slides-per-view="5" :space-between="8" :navigation="true"
       :pagination="{ clickable: true }" :modules="[Navigation, Pagination]" :breakpoints="{
         1200: { slidesPerView: 5 },
         1000: { slidesPerView: 4 },
@@ -59,7 +59,11 @@ const skills: Skill[] = [
 .mySwiper {
   background-color: rgb(0, 79, 67);
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .swiper-slide {
@@ -88,11 +92,40 @@ const skills: Skill[] = [
 .swiper-pagination-bullet {
   background: #166063;
   opacity: 0.7;
-  margin: 1rem;
+  margin: 0;
 }
 
 .swiper-pagination-bullet-active {
   background: #6AD9CA;
   opacity: 1;
+}
+
+@media (max-width: 870px) {
+  .mySwiper {
+    padding: 0.75rem;
+    border-radius: 6px;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+
+  .swiper-pagination-bullet {
+    margin: 0;
+  }
+
+  .swiper-slide v-icon {
+    font-size: 3em !important;
+  }
+}
+
+.mySwiper .swiper-pagination {
+  position: static;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding-top: 0.5rem;
 }
 </style>

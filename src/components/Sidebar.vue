@@ -17,32 +17,36 @@ defineProps({
 
 <template>
   <Transition name="sidebar">
-    <aside v-if="isOpen">
-      <button @click="handleClick">X</button>
+    <aside v-if="isOpen" role="dialog" aria-modal="true" aria-label="Site menu">
+      <button @click="handleClick" aria-label="Close menu">
+        <v-icon name="bi-x" scale="1.2" />
+      </button>
       <nav>
         <ul>
           <li>
-            <RouterLink style="text-decoration: none;" to="/">{{ $t('about') }}</RouterLink>
+            <RouterLink @click="handleClick" style="text-decoration: none;" to="/">{{ $t('home') }}</RouterLink>
           </li>
           <li>
-            <RouterLink style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
+            <RouterLink @click="handleClick" style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
           </li>
           <li>
-            <RouterLink style="text-decoration: none;" to="/music">{{ $t('music') }}</RouterLink>
+            <RouterLink @click="handleClick" style="text-decoration: none;" to="/music">{{ $t('music') }}</RouterLink>
           </li>
           <li>
-            <RouterLink style="text-decoration: none;" to="/contact">{{ $t('contact') }}</RouterLink>
+            <RouterLink @click="handleClick" style="text-decoration: none;" to="/contact">{{ $t('contact') }}</RouterLink>
           </li>
           <li>
-            <RouterLink style="text-decoration: none;" to="/my-projects">{{ $t('my-projects') }}</RouterLink>
+            <RouterLink @click="handleClick" style="text-decoration: none;" to="/my-projects">{{ $t('my-projects') }}</RouterLink>
           </li>
           <li>
-            <RouterLink style="text-decoration: none;" to="/about">{{ $t('aboutThisWebsite') }}</RouterLink>
+            <RouterLink @click="handleClick" style="text-decoration: none;" to="/about">{{ $t('aboutThisWebsite') }}</RouterLink>
           </li>
         </ul>
       </nav>
     </aside>
   </Transition>
+
+  <div v-if="isOpen" class="sidebar-backdrop" @click="handleClick" aria-hidden="true"></div>
 </template>
 
 <style>
@@ -85,25 +89,39 @@ aside {
   border-bottom-right-radius: 18px;
 }
 
-button {
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 999;
+}
+
+aside > button {
   all: unset;
   align-self: flex-end;
   cursor: pointer;
-  color: #000;
-  font-size: 1.5rem;
-  background: #166063;
-  border-radius: 50%;
-  width: 2.2rem;
+  color: #6AD9CA;
+  background: rgba(22, 96, 99, 0.18);
+  border: 1px solid rgba(106, 217, 202, 0.45);
+  border-radius: 10px;
+  width: 2.25rem;
+  height: 2.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-button:hover {
+aside > button:hover {
   background: #6AD9CA;
   color: #124344;
+  border-color: transparent;
+}
+
+aside > button:focus-visible {
+  outline: 2px solid #6AD9CA;
+  outline-offset: 2px;
 }
 
 nav ul {

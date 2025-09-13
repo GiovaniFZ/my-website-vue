@@ -22,7 +22,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <RoundedSection :title="$t('my-projects')">
+  <RoundedSection :title="$t('my-projects')" :iconName="'bi-kanban-fill'">
     <div v-if="loading" class="skeleton-loader">
       <div class="skeleton-text"></div>
       <div class="skeleton-text"></div>

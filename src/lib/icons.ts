@@ -1,12 +1,16 @@
 import { addIcons } from "oh-vue-icons";
 import {
-  BiLightbulbFill, CoJava, CoPython, CoLinux, SiMongodb, CoAndroid,
+  BiLightbulbFill, BiX,
+  CoJava, CoPython, CoLinux, SiMongodb, CoAndroid,
   CoVueJs, CoReact, CoWindows, CoAppleMusic, IoPerson,
-  BiTelegram, BiGithub, BiInstagram
+  BiTelegram, BiGithub, BiInstagram,
+  BiCodeSlash, BiKanbanFill
 } from "oh-vue-icons/icons";
 
 addIcons(
-  BiLightbulbFill, CoPython, CoJava, SiMongodb, CoAndroid,
+  BiLightbulbFill, BiX,
+  CoPython, CoJava, SiMongodb, CoAndroid,
   CoVueJs, CoReact, CoWindows, CoAppleMusic, IoPerson,
-  BiTelegram, BiGithub, BiInstagram, CoLinux
+  BiTelegram, BiGithub, BiInstagram, CoLinux,
+  BiCodeSlash, BiKanbanFill
 );
