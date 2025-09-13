@@ -21,3 +21,30 @@
     background-color: #f9f9f9;
   }
 }
+
+.skeleton-loader {
+  padding: 10px 0;
+}
+
+.skeleton-text {
+  height: 20px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1) 25%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0.1) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.error-message {
+  color: #ff6b6b;
+  padding: 10px 0;
+}
