@@ -7,15 +7,15 @@ import AboutWebsite from './views/AboutWebsite.vue'
 import MyProjects from './views/MyProjects.vue'
 
 const routes = [
-    { path: '/', component: AboutMe },
-    { path: '/skills', component: MySkills },
-    { path: '/music', component: Music },
-    { path: '/contact', component: Contact },
-    { path: '/about', component: AboutWebsite },
-    { path: '/my-projects', component: MyProjects },
+  { path: '/', component: AboutMe },
+  { path: '/skills', component: MySkills },
+  { path: '/music', component: Music },
+  { path: '/contact', component: Contact },
+  { path: '/about', component: AboutWebsite },
+  { path: '/my-projects', component: MyProjects },
 ]
 
 export const router = createRouter({
-    history: createMemoryHistory(),
-    routes,
+  history: createMemoryHistory(),
+  routes,
 })
