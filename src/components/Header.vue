@@ -130,7 +130,6 @@ header {
     color: #000;
     font-weight: 600;
     min-width: 3.2rem;
-    text-transform: uppercase;
     letter-spacing: 0.02em;
   }
 

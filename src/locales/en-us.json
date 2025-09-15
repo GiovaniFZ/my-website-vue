@@ -20,5 +20,7 @@
   "currentlyListening": "I'm currently listening to it!",
   "lastUpdate": "Last update: ",
   "noRecentTracks": "No recent tracks found",
+  "trackLoadError": "Failed to load track data",
+  "repositoryLoadError": "Failed to load repository data",
   "my-projects": "My Projects"
 }

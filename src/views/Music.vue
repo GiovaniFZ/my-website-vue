@@ -28,7 +28,7 @@ onMounted(async () => {
       <div class="skeleton-text"></div>
     </div>
     <div v-else-if="error" class="error-message">
-      <p>Failed to load track data</p>
+      <p>{{ $t('trackLoadError') }}</p>
     </div>
     <div v-else-if="track">
       <p>{{ track.artist['#text'] }} - {{ track.name }}</p>

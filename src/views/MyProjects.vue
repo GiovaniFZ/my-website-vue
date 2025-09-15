@@ -28,7 +28,7 @@ onMounted(async () => {
       <div class="skeleton-text"></div>
     </div>
     <div v-else-if="error" class="error-message">
-      <p>Failed to load repository data</p>
+      <p>{{ $t('repositoryLoadError') }}</p>
     </div>
     <div v-else>
       <!--

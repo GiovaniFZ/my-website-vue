@@ -20,5 +20,7 @@
   "currentlyListening": "Eu estou ouvindo neste momento!",
   "lastUpdate": "Última atualização: ",
   "noRecentTracks": "Nenhuma música recente encontrada",
+  "trackLoadError": "Falha ao carregar dados da faixa",
+  "repositoryLoadError": "Falha ao carregar dados do repositório",
   "my-projects": "Meus projetos"
 }
