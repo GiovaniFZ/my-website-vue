@@ -1,5 +1,7 @@
 # Giv's Website
 
+[Português](README.md) | [English](README_en.md)
+
 Olá, meu nome é Giovani (também conhecido como Giv). Esse é meu site pessoal desenvolvido em Vue.js com TypeScript que retrata quem eu sou e apresenta minhas habilidades como desenvolvedor.
 
 ## 🚀 Tecnologias Utilizadas
@@ -47,15 +49,17 @@ npm run build
 
 ## 📂 Estrutura do Projeto
 
-```
+```plaintext
 src/
-├── components/          # Componentes reutilizáveis
-├── views/              # Páginas da aplicação
-├── lib/                # Utilitários e APIs
-├── interfaces/         # Tipagens TypeScript
-└── i18n/              # Arquivos de tradução
+├── components/      # Componentes reutilizáveis
+├── views/           # Páginas da aplicação
+├── lib/             # Utilitários e APIs
+├── interfaces/      # Tipagens TypeScript
+└── i18n/            # Arquivos de tradução
 ```
+
 Obrigado por visitar o repositório, não esqueça de dar uma olhada também no site!
+
 ---
 
 Desenvolvido com ❤️ por **Giv**
