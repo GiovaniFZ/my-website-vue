@@ -14,26 +14,27 @@ function handleClick() {
 <template>
   <Sidebar :is-open="isOpen" @close="isOpen = false" />
   <header>
-    <button class="menu-icon" @click="handleClick">≡</button>
-    <a class="first-anchor">Giv's website</a>
+    <button class="menu-icon" @click="handleClick" aria-label="Open menu">≡</button>
+    <RouterLink class="first-anchor" to="/">Giv's Website</RouterLink>
     <nav>
-      <RouterLink style="text-decoration: none;" to="/">{{ $t('about') }}</RouterLink>
+      <RouterLink style="text-decoration: none;" to="/">{{ $t('home') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/music">{{ $t('music') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/contact">{{ $t('contact') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/my-projects">{{ $t('my-projects') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/about">{{ $t('aboutThisWebsite') }}</RouterLink>
-      <select v-model="locale">
-        <option v-for="loc in availableLocales" :key="`locale-${loc}`" :value="loc">{{ loc }}</option>
-      </select>
     </nav>
+    <select v-model="locale">
+      <option v-for="loc in availableLocales" :key="`locale-${loc}`" :value="loc">{{ loc }}</option>
+    </select>
   </header>
 </template>
 
 <style scoped>
 header {
   background-color: #123435;
-  padding: 1rem;
+  padding: 0.75rem calc(1rem + env(safe-area-inset-right));
+  padding-left: calc(1rem + env(safe-area-inset-left));
   top: 0;
   left: 0;
   border-radius: 8px;
@@ -43,40 +44,63 @@ header {
   position: fixed;
   width: 100%;
   box-sizing: border-box;
+  z-index: 900;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 
-  @media (max-width: 800px) {
+  @media (max-width: 870px) {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: auto 1fr auto;
+    gap: 0.5rem;
+    padding: 0.6rem calc(0.75rem + env(safe-area-inset-right));
+    padding-left: calc(0.75rem + env(safe-area-inset-left));
   }
-
 
   a {
     text-decoration: none;
     background-color: #6AD9CA;
-    border-radius: 4px;
+    border-radius: 6px;
     color: #000;
-    padding: 0.2rem;
+    padding: 0.25rem 0.5rem;
+    line-height: 1.2;
   }
 
   .menu-icon {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: large;
+    all: unset;
     display: none;
+    color: #fff;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 8px;
+    background: #166063;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
 
-    @media(max-width: 800px) {
-      display: block;
+    @media(max-width: 870px) {
+      display: inline-flex;
     }
+  }
+
+  .menu-icon:hover {
+    background: #1a6b64;
   }
 
   .first-anchor {
     background: none;
     color: #fff;
-    font-size: large;
+    font-size: 1.125rem;
+    padding: 0 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
-    @media(max-width: 800px) {
+    @media(max-width: 870px) {
       margin: 0 auto;
+      text-align: center;
+      max-width: 65vw;
     }
   }
 
@@ -92,18 +116,21 @@ header {
     justify-content: center;
     margin: 0 auto;
 
-    @media (max-width: 800px) {
+    @media (max-width: 870px) {
       display: none;
     }
   }
 
   select {
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
     cursor: pointer;
-    padding: 0.4rem;
+    padding: 0.45rem 0.6rem;
     background-color: #6AD9CA;
     color: #000;
+    font-weight: 600;
+    min-width: 3.2rem;
+    letter-spacing: 0.02em;
   }
 
   select:hover {
@@ -114,6 +141,5 @@ header {
     background-color: #fff;
     color: #000;
   }
-
 }
 </style>
