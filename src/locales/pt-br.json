@@ -22,5 +22,6 @@
   "noRecentTracks": "Nenhuma música recente encontrada",
   "trackLoadError": "Falha ao carregar dados da faixa",
   "repositoryLoadError": "Falha ao carregar dados do repositório",
-  "my-projects": "Meus projetos"
+  "my-projects": "Meus projetos",
+  "some-of": "Alguns dos"
 }

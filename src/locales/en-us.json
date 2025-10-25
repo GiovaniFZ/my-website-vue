@@ -22,5 +22,6 @@
   "noRecentTracks": "No recent tracks found",
   "trackLoadError": "Failed to load track data",
   "repositoryLoadError": "Failed to load repository data",
-  "my-projects": "My Projects"
+  "my-projects": "My Projects",
+  "some-of": "Some of "
 }

@@ -4,7 +4,7 @@ import {
   CoJava, CoPython, CoLinux, SiMongodb, CoAndroid,
   CoVueJs, CoReact, CoWindows, CoAppleMusic, IoPerson,
   BiTelegram, BiGithub, BiInstagram,
-  BiCodeSlash, BiKanbanFill
+  BiCodeSlash, BiKanbanFill, BiStarFill
 } from "oh-vue-icons/icons";
 
 addIcons(
@@ -12,5 +12,5 @@ addIcons(
   CoPython, CoJava, SiMongodb, CoAndroid,
   CoVueJs, CoReact, CoWindows, CoAppleMusic, IoPerson,
   BiTelegram, BiGithub, BiInstagram, CoLinux,
-  BiCodeSlash, BiKanbanFill
+  BiCodeSlash, BiKanbanFill, BiStarFill
 );

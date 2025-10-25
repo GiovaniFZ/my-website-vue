@@ -1,4 +1,4 @@
-const defaultApiUrl = `https://api.github.com/users/giovanifz/`;
+const defaultApiUrl = `https://api.github.com/users/giovanifz`;
 
 export const githubApi = {
   async get(endpoint: string) {
