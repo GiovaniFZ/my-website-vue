@@ -4,7 +4,7 @@ import { i18n } from './i18n'
 const routes = [
   { path: '/', component: () => import('./views/AboutMe.vue'), meta: { titleKey: 'home' } },
   { path: '/skills', component: () => import('./views/MySkills.vue'), meta: { titleKey: 'skills' } },
-  { path: '/music', component: () => import('./views/Music.vue'), meta: { titleKey: 'music' } },
+  { path: '/lastFM', component: () => import('./views/LastFM.vue'), meta: { titleKey: 'lastFM' } },
   { path: '/contact', component: () => import('./views/Contact.vue'), meta: { titleKey: 'contact' } },
   { path: '/about', component: () => import('./views/AboutWebsite.vue'), meta: { titleKey: 'aboutThisWebsite' } },
   { path: '/my-projects', component: () => import('./views/MyProjects.vue'), meta: { titleKey: 'my-projects' } },

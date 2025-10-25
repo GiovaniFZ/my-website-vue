@@ -30,7 +30,7 @@ defineProps({
             <RouterLink @click="handleClick" style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
           </li>
           <li>
-            <RouterLink @click="handleClick" style="text-decoration: none;" to="/music">{{ $t('music') }}</RouterLink>
+            <RouterLink @click="handleClick" style="text-decoration: none;" to="/lastFM">{{ $t('lastFM') }}</RouterLink>
           </li>
           <li>
             <RouterLink @click="handleClick" style="text-decoration: none;" to="/contact">{{ $t('contact') }}</RouterLink>

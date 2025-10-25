@@ -21,7 +21,7 @@ defineProps({
 <template>
   <div class="wrapper">
     <div class="container">
-      <div class="same-line" :class="{ 'align-start': isFirst }">
+      <div class="same-line">
         <img v-if="hasImage && image" :src="image" alt="Section icon" />
         <v-icon scale="7" v-else :name="iconName" aria-hidden="true" />
         <div v-if="subtitle" class="title-container">
@@ -69,6 +69,7 @@ defineProps({
   box-sizing: border-box;
   margin: 5rem 0.75rem 2rem 0.75rem;
   animation: colors 800ms ease-out both;
+
   @media(max-width: 870px) {
     padding: 1rem;
     margin: 6rem 0.75rem 1.25rem 0.75rem;
@@ -89,6 +90,12 @@ defineProps({
   @media(max-width: 870px) {
     flex-direction: column;
   }
+
+  .title-container,
+  h1 {
+    text-align: left;
+  }
+
 }
 
 .title-container {
@@ -126,11 +133,6 @@ h1 {
   }
 }
 
-.same-line.align-start .title-container,
-.same-line.align-start h1 {
-  text-align: left;
-}
-
 .title-container h1 {
   margin: 0;
 }
@@ -150,7 +152,7 @@ h1 {
   overflow: hidden;
 }
 
-.greeting + h1 {
+.greeting+h1 {
   margin-top: 0.25rem;
   line-height: 1.05;
 }
@@ -171,6 +173,7 @@ img {
   height: 17%;
   border-radius: 50%;
   animation: goToTop 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+
   @media(max-width: 870px) {
     margin-top: 1rem;
     width: 40%;
@@ -183,6 +186,7 @@ v-icon {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .wrapper,
   h1,
   img,
@@ -193,7 +197,7 @@ v-icon {
 }
 
 @media (max-width: 870px) {
-  .same-line > v-icon {
+  .same-line>v-icon {
     font-size: 4em !important;
   }
 }

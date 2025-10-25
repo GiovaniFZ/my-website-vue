@@ -22,7 +22,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <RoundedSection :title="$t('music')" :iconName="'co-apple-music'">
+  <RoundedSection :title="''" :subtitle="$t('lastFM')" :iconName="'co-apple-music'">
     <p>{{ $t('myLastDescription') }}</p>
     <div v-if="loading" class="skeleton-loader">
       <div class="skeleton-text"></div>

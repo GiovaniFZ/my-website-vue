@@ -4,7 +4,7 @@ import Package from '../../package.json'
 </script>
 
 <template>
-  <RoundedSection :title="$t('aboutThisWebsite')" :subtitle="$t('introduction')" :iconName="'bi-code-slash'">
+  <RoundedSection :title="$t('my')" :subtitle="$t('socialNetworks')" :iconName="'bi-code-slash'" isFirst>
     <p>{{ $t('aboutWebText') }}</p>
     <p>Version: {{ Package.version }}</p>
   </RoundedSection>

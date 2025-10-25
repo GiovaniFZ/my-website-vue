@@ -29,7 +29,7 @@ import RoundedSection from '../components/RoundedSection.vue';
 </style>
 
 <template>
-  <RoundedSection :title="$t('contact')" :iconName="'io-person'">
+  <RoundedSection :subtitle="$t('socialNetworks')" :title="$t('my')" :iconName="'io-person'">
     <div class="contact-icons">
       <a href="https://t.me/givfnz2" target="_blank" rel="noopener noreferrer">
         <v-icon name="bi-telegram" scale="5" />

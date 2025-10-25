@@ -26,7 +26,7 @@ const skills: Skill[] = [
 </script>
 
 <template>
-  <RoundedSection :title="$t('skills')" :iconName="'bi-lightbulb-fill'">
+  <RoundedSection :subtitle="$t('skills')" :title="$t('some-of-2')" :iconName="'bi-lightbulb-fill'">
     <swiper class="mySwiper" :slides-per-view="5" :space-between="8" :navigation="true"
       :pagination="{ clickable: true }" :modules="[Navigation, Pagination]" :breakpoints="{
         1200: { slidesPerView: 5 },

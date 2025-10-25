@@ -27,7 +27,7 @@ This website was created to present:
 
 - 🌐 **Multilingual** - Support for Portuguese and English
 - 📱 **Responsive** - Adapted for different screen sizes
-- 🎵 **Music Integration** - Shows the last song played in real time
+- 🎵 **LastFM Integration** - Shows the last song played in real time
 - 🎨 **Smooth Animations** - Modern transitions and visual effects
 - 🧭 **Intuitive Navigation** - Responsive side menu and fluid navigation
 

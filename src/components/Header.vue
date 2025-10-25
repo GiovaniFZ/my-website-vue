@@ -19,8 +19,8 @@ function handleClick() {
     <nav>
       <RouterLink style="text-decoration: none;" to="/">{{ $t('home') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
-      <RouterLink style="text-decoration: none;" to="/music">{{ $t('music') }}</RouterLink>
-      <RouterLink style="text-decoration: none;" to="/contact">{{ $t('contact') }}</RouterLink>
+      <RouterLink style="text-decoration: none;" to="/lastFM">{{ $t('lastFM') }}</RouterLink>
+      <RouterLink style="text-decoration: none;" to="/contact">{{ $t('socialNetworks') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/my-projects">{{ $t('my-projects') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/about">{{ $t('aboutThisWebsite') }}</RouterLink>
     </nav>
