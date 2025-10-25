@@ -6,7 +6,7 @@ const routes = [
   { path: '/skills', component: () => import('./views/MySkills.vue'), meta: { titleKey: 'skills' } },
   { path: '/lastFM', component: () => import('./views/LastFM.vue'), meta: { titleKey: 'lastFM' } },
   { path: '/contact', component: () => import('./views/Contact.vue'), meta: { titleKey: 'contact' } },
-  { path: '/about', component: () => import('./views/AboutWebsite.vue'), meta: { titleKey: 'aboutThisWebsite' } },
+  { path: '/about', component: () => import('./views/AboutWebsite.vue'), meta: { titleKey: 'about' } },
   { path: '/my-projects', component: () => import('./views/MyProjects.vue'), meta: { titleKey: 'my-projects' } },
 ]
 
