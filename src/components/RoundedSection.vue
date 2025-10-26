@@ -69,11 +69,16 @@ defineProps({
   box-sizing: border-box;
   margin: 5rem 0.75rem 2rem 0.75rem;
   animation: colors 800ms ease-out both;
+  transition: transform 0.3s ease;
 
   @media(max-width: 870px) {
     padding: 1rem;
     margin: 6rem 0.75rem 1.25rem 0.75rem;
   }
+}
+
+.wrapper:hover {
+  transform: scale(1.02);
 }
 
 .container {

@@ -43,7 +43,7 @@ const skills: Skill[] = [
           target="_blank"
           rel="noopener noreferrer"
         >
-          <v-icon :name="skill.icon" scale="5" />
+          <v-icon class="swiperIcon" :name="skill.icon" scale="5" />
           <p>{{ skill.name }}</p>
         </a>
         <div v-else class="skill-card">
@@ -57,13 +57,25 @@ const skills: Skill[] = [
 
 <style>
 .mySwiper {
-  background-color: rgb(0, 79, 67);
+  background-color: #0f403d;
   border-radius: 8px;
   padding: 1rem;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
   overflow: hidden;
+}
+
+.swiperIcon {
+  transition: transform 0.3s ease;
+}
+
+.swiperIcon:hover {
+  transform: scale(1.2);
+}
+
+.mySwiper:hover {
+  box-shadow: 0 0 15px #6AD9CA;
 }
 
 .swiper-slide {
