@@ -1,7 +1,7 @@
 {
   "name": "givs-website-vue",
   "private": true,
-  "version": "2.2.5",
+  "version": "2.2.9",
   "type": "module",
   "scripts": {
     "dev": "vite",
