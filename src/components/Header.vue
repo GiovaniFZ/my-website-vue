@@ -32,7 +32,7 @@ function handleClick() {
 
 <style scoped>
 header {
-  background-color: #123435;
+  background-color: #6AD9CA;
   padding: 0.75rem calc(1rem + env(safe-area-inset-right));
   padding-left: calc(1rem + env(safe-area-inset-left));
   top: 0;
@@ -45,7 +45,7 @@ header {
   width: 100%;
   box-sizing: border-box;
   z-index: 900;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 
   @media (max-width: 870px) {
     display: grid;
@@ -57,9 +57,9 @@ header {
 
   a {
     text-decoration: none;
-    background-color: #6AD9CA;
+    background-color: #006d71;
     border-radius: 6px;
-    color: #000;
+    color: #fff;
     padding: 0.25rem 0.5rem;
     line-height: 1.2;
   }
@@ -90,18 +90,12 @@ header {
 
   .first-anchor {
     background: none;
-    color: #fff;
+    color: #000;
     font-size: 1.125rem;
     padding: 0 10px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    @media(max-width: 870px) {
-      margin: 0 auto;
-      text-align: center;
-      max-width: 65vw;
-    }
   }
 
   a:hover {
