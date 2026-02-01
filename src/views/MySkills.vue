@@ -57,7 +57,7 @@ const skills: Skill[] = [
 
 <style>
 .mySwiper {
-  background-color: #0f403d;
+  background-color: #0d3b38;
   border-radius: 8px;
   padding: 1rem;
   width: 100%;
@@ -72,10 +72,6 @@ const skills: Skill[] = [
 
 .swiperIcon:hover {
   transform: scale(1.2);
-}
-
-.mySwiper:hover {
-  box-shadow: 0 0 15px #6AD9CA;
 }
 
 .swiper-slide {
@@ -98,17 +94,17 @@ const skills: Skill[] = [
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: #6AD9CA;
+  color: #5fd4c6;
 }
 
 .swiper-pagination-bullet {
-  background: #166063;
+  background: #0f5a57;
   opacity: 0.7;
   margin: 0;
 }
 
 .swiper-pagination-bullet-active {
-  background: #6AD9CA;
+  background: #5fd4c6;
   opacity: 1;
 }
 

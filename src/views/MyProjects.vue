@@ -62,7 +62,7 @@ onMounted(async () => {
   border-radius: 12px;
   text-decoration: none;
   background-color: #ffffff;
-  color: #123435;
+  color: #0f2f30;
   padding: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -72,11 +72,11 @@ onMounted(async () => {
 .roundedLink:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-  background-color: #f2fbf9;
+  background-color: #eef9f7;
 }
 
 .roundedLink:focus-visible {
-  outline: 2px solid #6AD9CA;
+  outline: 2px solid #5fd4c6;
   outline-offset: 3px;
 }
 
@@ -90,7 +90,7 @@ onMounted(async () => {
 
 .roundedLink p:first-child {
   font-weight: 700;
-  color: #0f3d3e;
+  color: #0e3a3b;
 }
 
 .roundedLink p:nth-child(2) {
@@ -98,7 +98,7 @@ onMounted(async () => {
 }
 
 .roundedLink p:last-child {
-  color: #166063;
+  color: #0f5a57;
   font-weight: 600;
 }
 
@@ -111,7 +111,7 @@ onMounted(async () => {
   align-items: center;
   gap: 0.4rem;
   margin-top: 0.5rem;
-  color: #166063;
+  color: #0f5a57;
 }
 
 .stars .count {

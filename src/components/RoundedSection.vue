@@ -40,11 +40,11 @@ defineProps({
 <style scoped>
 @keyframes colors {
   0% {
-    background-color: #1a6b64;
+    background-color: #13645e;
   }
 
   100% {
-    background-color: #166063;
+    background-color: #0f5a57;
   }
 }
 
@@ -63,7 +63,7 @@ defineProps({
 }
 
 .wrapper {
-  background-color: #166063;
+  background-color: #0f5a57;
   border-radius: 8px;
   padding: 3rem;
   box-sizing: border-box;

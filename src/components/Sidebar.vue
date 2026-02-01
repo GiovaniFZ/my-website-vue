@@ -71,7 +71,7 @@ defineProps({
 }
 
 aside {
-  background: linear-gradient(135deg, #124344 80%, #166063 100%);
+  background: linear-gradient(135deg, #0f3f3c 80%, #0f5a57 100%);
   opacity: 0.98;
   position: fixed;
   height: 100vh;
@@ -100,9 +100,9 @@ aside > button {
   all: unset;
   align-self: flex-end;
   cursor: pointer;
-  color: #6AD9CA;
-  background: rgba(22, 96, 99, 0.18);
-  border: 1px solid rgba(106, 217, 202, 0.45);
+  color: #5fd4c6;
+  background: rgba(15, 90, 87, 0.18);
+  border: 1px solid rgba(95, 212, 198, 0.45);
   border-radius: 10px;
   width: 2.25rem;
   height: 2.25rem;
@@ -114,13 +114,13 @@ aside > button {
 }
 
 aside > button:hover {
-  background: #6AD9CA;
-  color: #124344;
+  background: #5fd4c6;
+  color: #0f3f3c;
   border-color: transparent;
 }
 
 aside > button:focus-visible {
-  outline: 2px solid #6AD9CA;
+  outline: 2px solid #5fd4c6;
   outline-offset: 2px;
 }
 
@@ -149,8 +149,8 @@ li a {
 
 li a:hover,
 li a.router-link-exact-active {
-  background: #6AD9CA;
-  color: #124344;
+  background: #5fd4c6;
+  color: #0f3f3c;
 }
 
 .sidebar-enter-active {

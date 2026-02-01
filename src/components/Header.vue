@@ -15,7 +15,7 @@ function handleClick() {
   <Sidebar :is-open="isOpen" @close="isOpen = false" />
   <header>
     <button class="menu-icon" @click="handleClick" aria-label="Open menu">≡</button>
-    <RouterLink class="first-anchor" to="/">Giv's Website</RouterLink>
+    <div class="first-anchor">Giv's Website</div>
     <nav>
       <RouterLink style="text-decoration: none;" to="/">{{ $t('home') }}</RouterLink>
       <RouterLink style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
@@ -32,7 +32,7 @@ function handleClick() {
 
 <style scoped>
 header {
-  background-color: #6AD9CA;
+  background-color: #5fd4c6;
   padding: 0.75rem calc(1rem + env(safe-area-inset-right));
   padding-left: calc(1rem + env(safe-area-inset-left));
   top: 0;
@@ -57,7 +57,7 @@ header {
 
   a {
     text-decoration: none;
-    background-color: #006d71;
+    background-color: #0b6e6a;
     border-radius: 6px;
     color: #fff;
     padding: 0.25rem 0.5rem;
@@ -71,7 +71,7 @@ header {
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 8px;
-    background: #166063;
+    background: #0f5a57;
     display: none;
     align-items: center;
     justify-content: center;
@@ -85,12 +85,12 @@ header {
   }
 
   .menu-icon:hover {
-    background: #1a6b64;
+    background: #13645e;
   }
 
   .first-anchor {
     background: none;
-    color: #000;
+    color: #0f2f30;
     font-size: 1.125rem;
     padding: 0 10px;
     white-space: nowrap;
@@ -99,7 +99,7 @@ header {
   }
 
   a:hover {
-    background-color: #55bfb1;
+    background-color: #48b9ad;
     cursor: pointer;
   }
 
@@ -120,20 +120,25 @@ header {
     border-radius: 8px;
     cursor: pointer;
     padding: 0.45rem 0.6rem;
-    background-color: #6AD9CA;
-    color: #000;
+    background-color: #5fd4c6;
+    color: #0f2f30;
     font-weight: 600;
     min-width: 3.2rem;
     letter-spacing: 0.02em;
   }
 
   select:hover {
-    background-color: #55bfb1;
+    background-color: #48b9ad;
   }
 
   select option {
     background-color: #fff;
-    color: #000;
+    color: #0f2f30;
   }
+}
+  
+.router-link-active {
+  background: #1a9c90;
+  font-weight: bold;
 }
 </style>

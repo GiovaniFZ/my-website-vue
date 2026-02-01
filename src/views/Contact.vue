@@ -16,7 +16,7 @@ import RoundedSection from '../components/RoundedSection.vue';
 }
 
 .contact-icons a:hover {
-  color: #6AD9CA;
+  color: #5fd4c6;
   transform: scale(1.1);
   transition: all 0.3s ease;
 }
