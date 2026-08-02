@@ -6,12 +6,11 @@ import RoundedSection from '../components/RoundedSection.vue';
 import { githubApi } from '../lib/api/github';
 import type { GithubRepo } from '../interfaces/github';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
-import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 
-const repos = ref<GithubRepo[] | null>(null);
+const repos = ref<GithubRepo[]>([]);
 const loading = ref(true);
 const error = ref(false);
 
@@ -37,19 +36,25 @@ onMounted(async () => {
     <div v-else-if="error" class="error-message">
       <p>{{ $t('repositoryLoadError') }}</p>
     </div>
-    <swiper class="projectsSwiper"" :space-between="10" :navigation="true"
-      :pagination="{ clickable: true }" :modules="[Navigation, Pagination, Autoplay]"  
+    <swiper
+      v-else
+      :key="repos.length"
+      class="projectsSwiper"
+      :space-between="10"
+      :navigation="true"
+      :pagination="{ clickable: true }"
+      :modules="[Navigation, Pagination, Autoplay]"
       :breakpoints="{
         1200: { slidesPerView: 5 },
         700: { slidesPerView: 3 },
         500: { slidesPerView: 1 },
-      }" 
+      }"
       :autoplay="{
         delay: 3000,
         disableOnInteraction: false
       }">
-      <swiper-slide v-for="value in repos">
-        <a v-if="repos" class="roundedLink" :href="value.html_url" target="_blank" rel="noopener noreferrer">
+      <swiper-slide v-for="value in repos" :key="value.id">
+        <a class="roundedLink" :href="value.html_url" target="_blank" rel="noopener noreferrer">
           <p>{{ value.name }}</p>
           <p>{{ value.description }}</p>
           <div class="stars">
