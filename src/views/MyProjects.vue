@@ -37,8 +37,14 @@ onMounted(async () => {
     <div v-else-if="error" class="error-message">
       <p>{{ $t('repositoryLoadError') }}</p>
     </div>
-    <swiper class="projectsSwiper" :slides-per-view="3" :space-between="10" :navigation="true"
-      :pagination="{ clickable: true }" :modules="[Navigation, Pagination, Autoplay]" :autoplay="{
+    <swiper class="projectsSwiper"" :space-between="10" :navigation="true"
+      :pagination="{ clickable: true }" :modules="[Navigation, Pagination, Autoplay]"  
+      :breakpoints="{
+        1200: { slidesPerView: 5 },
+        700: { slidesPerView: 3 },
+        500: { slidesPerView: 1 },
+      }" 
+      :autoplay="{
         delay: 3000,
         disableOnInteraction: false
       }">
