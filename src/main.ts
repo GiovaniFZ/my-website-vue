@@ -5,10 +5,13 @@ import "./lib/icons";
 import { OhVueIcon } from "oh-vue-icons";
 import { router } from "./routes";
 import { i18n } from "./i18n";
+import { createPinia } from "pinia";
 
 const app = createApp(App);
+const pinia = createPinia();
 
 app.component("v-icon", OhVueIcon);
 app.use(router);
 app.use(i18n);
 app.mount("#app");
+app.use(pinia)
