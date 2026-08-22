@@ -16,6 +16,9 @@ export const useLastFM = defineStore('last-fm', {
     }),
     actions: {
         async requestLastFM() {
+            if (this.track !== null) {
+                return;
+            }
             this.loading = true;
             try {
                 const request = await api.get('/latest-song');
