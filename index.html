@@ -1,24 +1,1387 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Giv's Website</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
-    rel="stylesheet" media="print" onload="this.media='all'; this.onload=null;">
-  <noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap"
-      rel="stylesheet">
-  </noscript>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giovani — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0a0a0f;
+    --bg-mid: #13131a;
+    --bg-window: rgba(20, 20, 28, 0.75);
+    --border-glow: rgba(99, 102, 241, 0.35);
+    --accent-1: #7c3aed;
+    --accent-2: #06b6d4;
+    --accent-3: #f59e0b;
+    --accent-4: #10b981;
+    --text-primary: #e7e7ee;
+    --text-secondary: #8a8a9a;
+    --text-dim: #4a4a5a;
+    --danger: #ef4444;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg-deep);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  #bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .bg-gradient {
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(124, 58, 237, 0.15), transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.12), transparent 50%),
+      radial-gradient(circle at 50% 100%, rgba(245, 158, 11, 0.08), transparent 60%);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .grid-overlay {
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(124, 58, 237, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124, 58, 237, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 2;
+    pointer-events: none;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+
+  /* Taskbar (Windows-inspired) */
+  .taskbar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    gap: 8px;
+    padding: 10px 16px;
+    background: rgba(15, 15, 22, 0.85);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+
+  .taskbar-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .taskbar-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: -1;
+  }
+
+  .taskbar-btn:hover {
+    color: var(--text-primary);
+    transform: translateY(-2px);
+  }
+
+  .taskbar-btn:hover::before {
+    opacity: 0.15;
+  }
+
+  .taskbar-btn.active {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.25), rgba(6, 182, 212, 0.2));
+    color: var(--text-primary);
+  }
+
+  .taskbar-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+    border-radius: 2px;
+  }
+
+  .taskbar-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--text-secondary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .lang-btn:hover {
+    background: rgba(255,255,255,0.08);
+    color: var(--text-primary);
+  }
+
+  .lang-btn.active {
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: white;
+    border-color: transparent;
+  }
+
+  /* Main content */
+  main {
+    position: relative;
+    z-index: 10;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 80px 24px 140px;
+  }
+
+  .section {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* HERO */
+  .hero-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 20px;
+    color: var(--accent-4);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    width: fit-content;
+    animation: pulse-dot 2s infinite;
+  }
+
+  .hero-label::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--accent-4);
+    border-radius: 50%;
+    box-shadow: 0 0 12px var(--accent-4);
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .hero-hello {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-title {
+    font-size: clamp(48px, 9vw, 120px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #fff 0%, #a5a5b5 50%, #7c3aed 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: title-shine 8s ease-in-out infinite;
+    background-size: 200% 200%;
+  }
+
+  @keyframes title-shine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .hero-name {
+    display: block;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 300% 100%;
+    animation: name-flow 6s linear infinite;
+  }
+
+  @keyframes name-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+  }
+
+  .hero-desc {
+    font-size: 20px;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin-bottom: 40px;
+  }
+
+  .hero-desc strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 40px;
+  }
+
+  .tag {
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-secondary);
+    transition: all 0.25s;
+    cursor: default;
+  }
+
+  .tag:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-glow);
+    color: var(--text-primary);
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.2);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    position: relative;
+    padding: 14px 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: white;
+    box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: left 0.6s;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(124, 58, 237, 0.6);
+  }
+
+  .btn-primary:hover::before {
+    left: 100%;
+  }
+
+  .btn-ghost {
+    background: rgba(255,255,255,0.04);
+    color: var(--text-primary);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .btn-ghost:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: var(--border-glow);
+    transform: translateY(-3px);
+  }
+
+  /* Section headers */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .section-number {
+    font-size: 14px;
+    color: var(--accent-1);
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(124, 58, 237, 0.5), transparent);
+  }
+
+  /* About window */
+  .window {
+    background: var(--bg-window);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+    transition: transform 0.4s, box-shadow 0.4s;
+  }
+
+  .window:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(124, 58, 237, 0.15);
+  }
+
+  .window-titlebar {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    background: rgba(0,0,0,0.3);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    gap: 10px;
+  }
+
+  .window-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+
+  .dot:hover {
+    transform: scale(1.2);
+  }
+
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+
+  .window-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-left: 10px;
+  }
+
+  .window-body {
+    padding: 32px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 16px;
+    color: var(--text-secondary);
+  }
+
+  .about-text p {
+    margin-bottom: 16px;
+  }
+
+  .about-text .highlight {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .code-block {
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+
+  .code-comment { color: #6a737d; }
+  .code-keyword { color: #c678dd; }
+  .code-string { color: #98c379; }
+  .code-var { color: #61afef; }
+  .code-prop { color: #e06c75; }
+  .code-num { color: #d19a66; }
+
+  /* Projects */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
+
+  .project-card {
+    background: var(--bg-window);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s;
+  }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-glow);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(124, 58, 237, 0.2);
+  }
+
+  .project-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .project-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.2), rgba(6, 182, 212, 0.2));
+    border: 1px solid rgba(124, 58, 237, 0.3);
+  }
+
+  .project-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .project-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tech-badge {
+    padding: 4px 10px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  /* Numbers */
+  .numbers-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .numbers-display {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .numbers-display::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(124, 58, 237, 0.2), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .numbers-display.flash::before {
+    opacity: 1;
+  }
+
+  .number-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s;
+    display: inline-block;
+  }
+
+  .number-value.pop {
+    animation: number-pop 0.4s ease-out;
+  }
+
+  @keyframes number-pop {
+    0% { transform: scale(1.3); }
+    50% { transform: scale(0.95); }
+    100% { transform: scale(1); }
+  }
+
+  .number-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .numbers-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .control-group {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .control-group label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-secondary);
+    min-width: 80px;
+  }
+
+  .control-group input {
+    flex: 1;
+    padding: 12px 16px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+
+  .control-group input:focus {
+    outline: none;
+    border-color: var(--accent-1);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+  }
+
+  /* Contact */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .contact-card {
+    background: var(--bg-window);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition: all 0.3s;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-4px) translateX(4px);
+    border-color: var(--border-glow);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+  }
+
+  .contact-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-info h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .contact-info p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  footer .heart {
+    color: #ef4444;
+    animation: heartbeat 1.5s infinite;
+    display: inline-block;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    50% { transform: scale(1); }
+    75% { transform: scale(1.15); }
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    main { padding: 40px 16px 120px; }
+    .section { min-height: auto; padding: 40px 0; }
+    .about-grid { grid-template-columns: 1fr; }
+    .numbers-box { grid-template-columns: 1fr; }
+    .taskbar {
+      bottom: 10px;
+      padding: 8px;
+      gap: 4px;
+      overflow-x: auto;
+      max-width: calc(100vw - 20px);
+    }
+    .taskbar-btn {
+      padding: 8px 12px;
+      font-size: 11px;
+    }
+    .taskbar-btn span.label { display: none; }
+    .window-body { padding: 20px; }
+    .code-block { padding: 16px; font-size: 11px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Copy button */
+  .copy-fab {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 200;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+  }
+
+  .copy-fab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(124, 58, 237, 0.6);
+  }
+
+  .copy-fab.copied {
+    background: linear-gradient(135deg, var(--accent-4), #059669);
+  }
+</style>
 </head>
-
 <body>
-  <div id="app"></div>
-  <script type="module" src="/src/main.ts"></script>
-</body>
 
+<canvas id="bg-canvas"></canvas>
+<div class="bg-gradient"></div>
+<div class="grid-overlay"></div>
+
+<button class="copy-fab" id="copyBtn" onclick="copyCode()">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+  <span data-i18n="copy_code">Скопировать код</span>
+</button>
+
+<main>
+  <!-- HERO -->
+  <section class="section visible" id="home">
+    <div class="hero-label">
+      <span data-i18n="status">Открыт для предложений</span>
+    </div>
+    <div class="hero-hello" data-i18n="hello">Привет,</div>
+    <h1 class="hero-title">
+      <span data-i18n="im">Я —</span>
+      <span class="hero-name">Giovani.</span>
+    </h1>
+    <p class="hero-desc">
+      <span data-i18n="hero_desc_1">Я </span><strong data-i18n="role">software engineer</strong><span data-i18n="hero_desc_2">, работаю IT-аналитиком и живу в </span><strong data-i18n="country">Бразилии</strong><span data-i18n="hero_desc_3">. Обожаю программирование, страстно увлекаюсь веб-разработкой и всегда открыт к участию в </span><strong data-i18n="oss">open-source проектах</strong><span data-i18n="hero_desc_4">.</span>
+    </p>
+    <div class="hero-tags">
+      <span class="tag">JavaScript</span>
+      <span class="tag">Python</span>
+      <span class="tag">React</span>
+      <span class="tag">Node.js</span>
+      <span class="tag">TypeScript</span>
+      <span class="tag">Git</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">
+        <span data-i18n="view_work">Смотреть работы</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+      <a href="#contact" class="btn btn-ghost">
+        <span data-i18n="contact_me">Связаться</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="section-header">
+      <span class="section-number">01</span>
+      <h2 class="section-title" data-i18n="about">Обо мне</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-dots">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <span class="window-title">~/about.md — zsh</span>
+      </div>
+      <div class="window-body">
+        <div class="about-grid">
+          <div class="about-text">
+            <p data-i18n="about_p1">Я — разработчик с многолетним опытом создания <span class="highlight">масштабируемых веб-приложений</span> и решений на базе современных технологий.</p>
+            <p data-i18n="about_p2">Мой путь начался с любопытства к тому, как работают компьютеры, и превратился в профессию, в которой я каждый день создаю продукты, улучшающие жизнь людей.</p>
+            <p data-i18n="about_p3">Я верю в <span class="highlight">чистый код</span>, <span class="highlight">продуманную архитектуру</span> и силу <span class="highlight">сообщества open-source</span>.</p>
+          </div>
+          <div class="code-block">
+<span class="code-comment">// whoami.json</span><br>
+{<br>
+&nbsp;&nbsp;<span class="code-prop">"name"</span>: <span class="code-string">"Giovani"</span>,<br>
+&nbsp;&nbsp;<span class="code-prop">"role"</span>: <span class="code-string">"Software Engineer"</span>,<br>
+&nbsp;&nbsp;<span class="code-prop">"location"</span>: <span class="code-string">"Brazil 🇧🇷"</span>,<br>
+&nbsp;&nbsp;<span class="code-prop">"stack"</span>: [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"TypeScript"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"Python"</span>,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"React"</span><br>
+&nbsp;&nbsp;],<br>
+&nbsp;&nbsp;<span class="code-prop">"passion"</span>: <span class="code-string">"Open Source"</span>,<br>
+&nbsp;&nbsp;<span class="code-prop">"coffee"</span>: <span class="code-keyword">true</span><br>
+}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section" id="projects">
+    <div class="section-header">
+      <span class="section-number">02</span>
+      <h2 class="section-title" data-i18n="projects">Проекты</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-icon">🚀</div>
+        <h3 class="project-name" data-i18n="proj1_name">API Gateway</h3>
+        <p class="project-desc" data-i18n="proj1_desc">Высокопроизводительный API-шлюз с поддержкой rate-limiting и аутентификации.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Node.js</span>
+          <span class="tech-badge">Redis</span>
+          <span class="tech-badge">Docker</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🎨</div>
+        <h3 class="project-name" data-i18n="proj2_name">Design System</h3>
+        <p class="project-desc" data-i18n="proj2_desc">UI-библиотека компонентов для построения консистентных интерфейсов.</p>
+        <div class="project-tech">
+          <span class="tech-badge">React</span>
+          <span class="tech-badge">TypeScript</span>
+          <span class="tech-badge">Storybook</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">📊</div>
+        <h3 class="project-name" data-i18n="proj3_name">Analytics Tool</h3>
+        <p class="project-desc" data-i18n="proj3_desc">Self-hosted платформа веб-аналитики с уважением к приватности.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">FastAPI</span>
+          <span class="tech-badge">ClickHouse</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🔐</div>
+        <h3 class="project-name" data-i18n="proj4_name">Auth Service</h3>
+        <p class="project-desc" data-i18n="proj4_desc">Микросервис аутентификации с поддержкой OAuth 2.0 и JWT.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Go</span>
+          <span class="tech-badge">PostgreSQL</span>
+          <span class="tech-badge">gRPC</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🤖</div>
+        <h3 class="project-name" data-i18n="proj5_name">CLI Assistant</h3>
+        <p class="project-desc" data-i18n="proj5_desc">Утилита командной строки для автоматизации рутинных задач разработчика.</p>
+        <div class="project-tech">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Click</span>
+          <span class="tech-badge">Rich</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-icon">🌐</div>
+        <h3 class="project-name" data-i18n="proj6_name">Open Source</h3>
+        <p class="project-desc" data-i18n="proj6_desc">Вклад в десятки открытых проектов — от библиотек до фреймворков.</p>
+        <div class="project-tech">
+          <span class="tech-badge">OSS</span>
+          <span class="tech-badge">Community</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUMBERS -->
+  <section class="section" id="numbers">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <h2 class="section-title" data-i18n="numbers">Числа</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="window">
+      <div class="window-titlebar">
+        <div class="window-dots">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+        </div>
+        <span class="window-title">numbers.exe — rng</span>
+      </div>
+      <div class="window-body">
+        <div class="numbers-box">
+          <div class="numbers-display" id="numbersDisplay">
+            <span class="number-value" id="numberValue">42</span>
+            <span class="number-label" data-i18n="random_num">случайное число</span>
+          </div>
+          <div class="numbers-controls">
+            <div class="control-group">
+              <label data-i18n="min">Мин</label>
+              <input type="number" id="minVal" value="1">
+            </div>
+            <div class="control-group">
+              <label data-i18n="max">Макс</label>
+              <input type="number" id="maxVal" value="100">
+            </div>
+            <button class="btn btn-primary" onclick="generateNumber()" style="justify-content:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+              <span data-i18n="generate">Сгенерировать</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <h2 class="section-title" data-i18n="contact">Контакты</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-grid">
+      <a href="mailto:giovani@givfnz.com" class="contact-card">
+        <div class="contact-icon" style="background: linear-gradient(135deg, #ef4444, #f59e0b);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </div>
+        <div class="contact-info">
+          <h4 data-i18n="email">Email</h4>
+          <p>giovani@givfnz.com</p>
+        </div>
+      </a>
+      <a href="https://github.com/givfnz" target="_blank" class="contact-card">
+        <div class="contact-icon" style="background: linear-gradient(135deg, #7c3aed, #06b6d4);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58v-2.17c-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </div>
+        <div class="contact-info">
+          <h4>GitHub</h4>
+          <p>@givfnz</p>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/givfnz" target="_blank" class="contact-card">
+        <div class="contact-icon" style="background: linear-gradient(135deg, #0077b5, #00a0dc);">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.26 2.36 4.26 5.43v6.31zM5.34 7.43c-1.14 0-2.06-.93-2.06-2.07 0-1.14.92-2.06 2.06-2.06 1.14 0 2.06.92 2.06 2.06 0 1.14-.92 2.07-2.06 2.07zm1.78 13.02H3.56V9h3.56v11.45z"/></svg>
+        </div>
+        <div class="contact-info">
+          <h4>LinkedIn</h4>
+          <p>@givfnz</p>
+        </div>
+      </a>
+      <a href="https://x.com/givfnz" target="_blank" class="contact-card">
+        <div class="contact-icon" style="background: linear-gradient(135deg, #1a1a2e, #4a4a5a);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.25 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </div>
+        <div class="contact-info">
+          <h4>Twitter / X</h4>
+          <p>@givfnz</p>
+        </div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p data-i18n="footer">Сделано с <span class="heart">❤</span> Giovani · 2026</p>
+</footer>
+
+<!-- TASKBAR -->
+<nav class="taskbar">
+  <button class="taskbar-btn active" onclick="scrollTo2('home', this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    <span class="label" data-i18n="nav_home">Главная</span>
+  </button>
+  <button class="taskbar-btn" onclick="scrollTo2('about', this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    <span class="label" data-i18n="nav_about">Обо мне</span>
+  </button>
+  <button class="taskbar-btn" onclick="scrollTo2('projects', this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    <span class="label" data-i18n="nav_projects">Проекты</span>
+  </button>
+  <button class="taskbar-btn" onclick="scrollTo2('numbers', this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg>
+    <span class="label" data-i18n="nav_numbers">Числа</span>
+  </button>
+  <button class="taskbar-btn" onclick="scrollTo2('contact', this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    <span class="label" data-i18n="nav_contact">Контакты</span>
+  </button>
+  <div style="width:1px;background:rgba(255,255,255,0.08);margin:0 4px;"></div>
+  <button class="lang-btn" data-lang="ru" onclick="setLang('ru', this)">RU</button>
+  <button class="lang-btn active" data-lang="en" onclick="setLang('en', this)">EN</button>
+  <button class="lang-btn" data-lang="es" onclick="setLang('es', this)">ES</button>
+  <button class="lang-btn" data-lang="de" onclick="setLang('de', this)">DE</button>
+</nav>
+
+<script>
+/* ============ TRANSLATIONS ============ */
+const translations = {
+  ru: {
+    copy_code: "Скопировать код",
+    copied: "Скопировано!",
+    status: "Открыт для предложений",
+    hello: "Привет,",
+    im: "Я —",
+    hero_desc_1: "Я ", role: "software engineer", hero_desc_2: ", работаю IT-аналитиком и живу в ", country: "Бразилии", hero_desc_3: ". Обожаю программирование, страстно увлекаюсь веб-разработкой и всегда открыт к участию в ", oss: "open-source проектах", hero_desc_4: ".",
+    view_work: "Смотреть работы", contact_me: "Связаться",
+    about: "Обо мне",
+    about_p1: "Я — разработчик с многолетним опытом создания <span class='highlight'>масштабируемых веб-приложений</span> и решений на базе современных технологий.",
+    about_p2: "Мой путь начался с любопытства к тому, как работают компьютеры, и превратился в профессию, в которой я каждый день создаю продукты, улучшающие жизнь людей.",
+    about_p3: "Я верю в <span class='highlight'>чистый код</span>, <span class='highlight'>продуманную архитектуру</span> и силу <span class='highlight'>сообщества open-source</span>.",
+    projects: "Проекты",
+    proj1_name: "API Gateway", proj1_desc: "Высокопроизводительный API-шлюз с поддержкой rate-limiting и аутентификации.",
+    proj2_name: "Design System", proj2_desc: "UI-библиотека компонентов для построения консистентных интерфейсов.",
+    proj3_name: "Analytics Tool", proj3_desc: "Self-hosted платформа веб-аналитики с уважением к приватности.",
+    proj4_name: "Auth Service", proj4_desc: "Микросервис аутентификации с поддержкой OAuth 2.0 и JWT.",
+    proj5_name: "CLI Assistant", proj5_desc: "Утилита командной строки для автоматизации рутинных задач разработчика.",
+    proj6_name: "Open Source", proj6_desc: "Вклад в десятки открытых проектов — от библиотек до фреймворков.",
+    numbers: "Числа", random_num: "случайное число", min: "Мин", max: "Макс", generate: "Сгенерировать",
+    contact: "Контакты", email: "Почта",
+    footer: "Сделано с <span class='heart'>❤</span> Giovani · 2026",
+    nav_home: "Главная", nav_about: "Обо мне", nav_projects: "Проекты", nav_numbers: "Числа", nav_contact: "Контакты"
+  },
+  en: {
+    copy_code: "Copy code",
+    copied: "Copied!",
+    status: "Open to offers",
+    hello: "Hello,",
+    im: "I'm",
+    hero_desc_1: "I'm a ", role: "software engineer", hero_desc_2: ", currently working as an IT analyst and living in ", country: "Brazil", hero_desc_3: ". I love programming, passionate about web development and always open to contribute to ", oss: "open source projects", hero_desc_4: ".",
+    view_work: "View work", contact_me: "Contact me",
+    about: "About",
+    about_p1: "I'm a developer with years of experience building <span class='highlight'>scalable web apps</span> and modern tech solutions.",
+    about_p2: "My journey started with curiosity about how computers work, and became a career where I build products that improve people's lives.",
+    about_p3: "I believe in <span class='highlight'>clean code</span>, <span class='highlight'>thoughtful architecture</span>, and the power of the <span class='highlight'>open-source community</span>.",
+    projects: "Projects",
+    proj1_name: "API Gateway", proj1_desc: "High-performance API gateway with rate-limiting and auth.",
+    proj2_name: "Design System", proj2_desc: "UI component library for consistent interfaces.",
+    proj3_name: "Analytics Tool", proj3_desc: "Privacy-first, self-hosted web analytics platform.",
+    proj4_name: "Auth Service", proj4_desc: "Authentication microservice with OAuth 2.0 & JWT support.",
+    proj5_name: "CLI Assistant", proj5_desc: "Command-line tool for automating dev routines.",
+    proj6_name: "Open Source", proj6_desc: "Contributing to dozens of open projects — from libs to frameworks.",
+    numbers: "Numbers", random_num: "random number", min: "Min", max: "Max", generate: "Generate",
+    contact: "Contact", email: "Email",
+    footer: "Made with <span class='heart'>❤</span> by Giovani · 2026",
+    nav_home: "Home", nav_about: "About", nav_projects: "Projects", nav_numbers: "Numbers", nav_contact: "Contact"
+  },
+  es: {
+    copy_code: "Copiar código",
+    copied: "¡Copiado!",
+    status: "Abierto a ofertas",
+    hello: "Hola,",
+    im: "Soy",
+    hero_desc_1: "Soy ", role: "ingeniero de software", hero_desc_2: ", trabajo como analista IT y vivo en ", country: "Brasil", hero_desc_3: ". Me encanta programar, soy apasionado por el desarrollo web y siempre estoy abierto a contribuir a ", oss: "proyectos open source", hero_desc_4: ".",
+    view_work: "Ver trabajos", contact_me: "Contactar",
+    about: "Sobre mí",
+    about_p1: "Soy un desarrollador con años de experiencia creando <span class='highlight'>aplicaciones web escalables</span> y soluciones tecnológicas modernas.",
+    about_p2: "Mi camino comenzó con curiosidad sobre cómo funcionan las computadoras, y se convirtió en una carrera donde construyo productos que mejoran la vida.",
+    about_p3: "Creo en el <span class='highlight'>código limpio</span>, la <span class='highlight'>arquitectura pensada</span> y el poder de la <span class='highlight'>comunidad open source</span>.",
+    projects: "Proyectos",
+    proj1_name: "API Gateway", proj1_desc: "Gateway API de alto rendimiento con rate-limiting y autenticación.",
+    proj2_name: "Design System", proj2_desc: "Librería de componentes UI para interfaces consistentes.",
+    proj3_name: "Analytics Tool", proj3_desc: "Plataforma de analítica web auto-alojada y respetuosa con la privacidad.",
+    proj4_name: "Auth Service", proj4_desc: "Microservicio de autenticación con OAuth 2.0 y JWT.",
+    proj5_name: "CLI Assistant", proj5_desc: "Herramienta CLI para automatizar tareas de desarrollo.",
+    proj6_name: "Open Source", proj6_desc: "Contribución a decenas de proyectos abiertos — de librerías a frameworks.",
+    numbers: "Números", random_num: "número aleatorio", min: "Mín", max: "Máx", generate: "Generar",
+    contact: "Contacto", email: "Correo",
+    footer: "Hecho con <span class='heart'>❤</span> por Giovani · 2026",
+    nav_home: "Inicio", nav_about: "Sobre", nav_projects: "Proyectos", nav_numbers: "Números", nav_contact: "Contacto"
+  },
+  de: {
+    copy_code: "Code kopieren",
+    copied: "Kopiert!",
+    status: "Offen für Angebote",
+    hello: "Hallo,",
+    im: "Ich bin",
+    hero_desc_1: "Ich bin ", role: "Software Engineer", hero_desc_2: ", arbeite als IT-Analyst und lebe in ", country: "Brasilien", hero_desc_3: ". Ich liebe Programmieren, bin begeistert von Webentwicklung und immer offen für Beiträge zu ", oss: "Open-Source-Projekten", hero_desc_4: ".",
+    view_work: "Arbeiten ansehen", contact_me: "Kontakt",
+    about: "Über mich",
+    about_p1: "Ich bin ein Entwickler mit jahrelanger Erfahrung im Bau <span class='highlight'>skalierbarer Web-Apps</span> und moderner Tech-Lösungen.",
+    about_p2: "Mein Weg begann mit Neugier auf Computer und wurde zu einer Karriere, in der ich Produkte baue, die Leben verbessern.",
+    about_p3: "Ich glaube an <span class='highlight'>sauberen Code</span>, <span class='highlight'>durchdachte Architektur</span> und die Kraft der <span class='highlight'>Open-Source-Community</span>.",
+    projects: "Projekte",
+    proj1_name: "API Gateway", proj1_desc: "Hochleistungs-API-Gateway mit Rate-Limiting und Authentifizierung.",
+    proj2_name: "Design System", proj2_desc: "UI-Komponentenbibliothek für konsistente Oberflächen.",
+    proj3_name: "Analytics Tool", proj3_desc: "Self-hosted Web-Analytics-Plattform mit Fokus auf Privatsphäre.",
+    proj4_name: "Auth Service", proj4_desc: "Authentifizierungs-Microservice mit OAuth 2.0 und JWT.",
+    proj5_name: "CLI Assistant", proj5_desc: "CLI-Tool zur Automatisierung von Entwickler-Routinen.",
+    proj6_name: "Open Source", proj6_desc: "Beiträge zu Dutzenden offenen Projekten — von Bibliotheken bis Frameworks.",
+    numbers: "Zahlen", random_num: "Zufallszahl", min: "Min", max: "Max", generate: "Generieren",
+    contact: "Kontakt", email: "E-Mail",
+    footer: "Mit <span class='heart'>❤</span> gemacht von Giovani · 2026",
+    nav_home: "Start", nav_about: "Über", nav_projects: "Projekte", nav_numbers: "Zahlen", nav_contact: "Kontakt"
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang, btn) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key]) el.innerHTML = t[key];
+  });
+}
+
+// Set default to Russian as requested
+setLang('ru', document.querySelector('.lang-btn[data-lang="ru"]'));
+
+/* ============ CANVAS BACKGROUND (flying symbols) ============ */
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const symbols = [
+  // Python
+  {text: '🐍', color: '#3776ab'},
+  {text: '{ }', color: '#f7d048'},
+  {text: 'def', color: '#3776ab'},
+  {text: 'λ', color: '#f7d048'},
+  // Windows
+  {text: '⊞', color: '#00a4ef'},
+  {text: '⊟', color: '#f25022'},
+  {text: '⊠', color: '#7fba00'},
+  {text: '⊡', color: '#ffb900'},
+  // JS / Web
+  {text: 'JS', color: '#f7df1e'},
+  {text: '</>', color: '#e34f26'},
+  {text: '{ }', color: '#61dafb'},
+  {text: 'TS', color: '#3178c6'},
+  // Git / Dev
+  {text: '⑂', color: '#f05032'},
+  {text: '→', color: '#9b9bff'},
+  {text: '#', color: '#7c3aed'},
+  {text: '0', color: '#10b981'},
+  {text: '1', color: '#06b6d4'},
+  {text: '✓', color: '#10b981'},
+  {text: '⌘', color: '#a5a5b5'},
+  {text: '⚡', color: '#f59e0b'}
+];
+
+class Particle {
+  constructor() {
+    this.reset();
+    this.y = Math.random() * canvas.height;
+  }
+  reset() {
+    const s = symbols[Math.floor(Math.random() * symbols.length)];
+    this.text = s.text;
+    this.color = s.color;
+    this.size = 10 + Math.random() * 18;
+    this.x = Math.random() * canvas.width;
+    this.y = canvas.height + 20;
+    this.vx = (Math.random() - 0.5) * 0.4;
+    this.vy = -(0.3 + Math.random() * 0.8);
+    this.rotation = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.01;
+    this.opacity = 0.15 + Math.random() * 0.35;
+    this.pulse = Math.random() * Math.PI * 2;
+    this.pulseSpeed = 0.01 + Math.random() * 0.02;
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.rotation += this.rotSpeed;
+    this.pulse += this.pulseSpeed;
+    if (this.y < -30 || this.x < -30 || this.x > canvas.width + 30) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rotation);
+    ctx.globalAlpha = this.opacity * (0.7 + 0.3 * Math.sin(this.pulse));
+    ctx.fillStyle = this.color;
+    ctx.font = `bold ${this.size}px 'JetBrains Mono', monospace`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.shadowColor = this.color;
+    ctx.shadowBlur = 8;
+    ctx.fillText(this.text, 0, 0);
+    ctx.restore();
+  }
+}
+
+// Adjust particle count based on device
+const isMobile = window.innerWidth < 768;
+const particleCount = isMobile ? 25 : 70;
+for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+// Mouse parallax
+let mouseX = 0, mouseY = 0;
+window.addEventListener('mousemove', e => {
+  mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+  mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+});
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    p.x += mouseX * 0.1;
+    p.update();
+    p.draw();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+/* ============ INTERSECTION OBSERVER FOR SECTIONS ============ */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+/* ============ NUMBERS FUNCTION ============ */
+function generateNumber() {
+  const min = parseInt(document.getElementById('minVal').value) || 0;
+  const max = parseInt(document.getElementById('maxVal').value) || 100;
+  const actualMin = Math.min(min, max);
+  const actualMax = Math.max(min, max);
+  const val = Math.floor(Math.random() * (actualMax - actualMin + 1)) + actualMin;
+  const el = document.getElementById('numberValue');
+  const display = document.getElementById('numbersDisplay');
+  el.textContent = val;
+  el.classList.remove('pop');
+  display.classList.remove('flash');
+  void el.offsetWidth;
+  el.classList.add('pop');
+  display.classList.add('flash');
+  setTimeout(() => display.classList.remove('flash'), 500);
+}
+
+/* ============ NAV SCROLL ============ */
+function scrollTo2(id, btn) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  document.querySelectorAll('.taskbar-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+// Update active taskbar on scroll
+const sections = ['home', 'about', 'projects', 'numbers', 'contact'];
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY + window.innerHeight / 2;
+  let current = 'home';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollY) current = id;
+  });
+  const btns = document.querySelectorAll('.taskbar-btn');
+  btns.forEach((b, i) => {
+    b.classList.toggle('active', sections[i] === current);
+  });
+});
+
+/* ============ COPY CODE BUTTON ============ */
+function copyCode() {
+  const code = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+  navigator.clipboard.writeText(code).then(() => {
+    const btn = document.getElementById('copyBtn');
+    const span = btn.querySelector('span');
+    const orig = span.textContent;
+    span.textContent = translations[currentLang].copied;
+    btn.classList.add('copied');
+    setTimeout(() => {
+      span.textContent = orig;
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(() => alert('Copy failed — please select and copy manually'));
+}
+</script>
+</body>
 </html>
