@@ -160,11 +160,6 @@ defineProps({
     box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
     transition: transform 0.4s, box-shadow 0.4s;
     margin: 5rem 0.75rem 2rem 0.75rem;
-
-  @media(max-width: 870px) {
-    padding: 1rem;
-    margin: 6rem 0.75rem 1.25rem 0.75rem;
-  }
 }
 
 .wrapper.is-dragging {

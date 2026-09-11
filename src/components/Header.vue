@@ -59,7 +59,6 @@ header {
 
   a {
     text-decoration: none;
-    background-color: #0b6e6a;
     border-radius: 6px;
     color: #fff;
     padding: 0.25rem 0.5rem;
@@ -73,7 +72,7 @@ header {
     width: 2.25rem;
     height: 2.25rem;
     border-radius: 8px;
-    background: #0f5a57;
+    background: var(--bg-mid);
     display: none;
     align-items: center;
     justify-content: center;
@@ -84,10 +83,6 @@ header {
     @media(max-width: 870px) {
       display: inline-flex;
     }
-  }
-
-  .menu-icon:hover {
-    background: #13645e;
   }
 
   .first-anchor {

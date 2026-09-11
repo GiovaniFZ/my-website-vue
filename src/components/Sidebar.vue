@@ -24,22 +24,22 @@ defineProps({
       <nav>
         <ul>
           <li>
-            <RouterLink @click="handleClick" style="text-decoration: none;" to="/">{{ $t('home') }}</RouterLink>
+            <RouterLink @click="handleClick" class="navlink" to="/">{{ $t('home') }}</RouterLink>
           </li>
           <li>
-            <RouterLink @click="handleClick" style="text-decoration: none;" to="/skills">{{ $t('skills') }}</RouterLink>
+            <RouterLink @click="handleClick" class="navlink" to="/skills">{{ $t('skills') }}</RouterLink>
           </li>
           <li>
-            <RouterLink @click="handleClick" style="text-decoration: none;" to="/lastFM">{{ $t('lastFM') }}</RouterLink>
+            <RouterLink @click="handleClick" class="navlink" to="/lastFM">{{ $t('lastFM') }}</RouterLink>
           </li>
           <li>
-            <RouterLink @click="handleClick" style="text-decoration: none;" to="/contact">{{ $t('socialNetworks') }}</RouterLink>
+            <RouterLink @click="handleClick" class="navlink" to="/contact">{{ $t('socialNetworks') }}</RouterLink>
           </li>
           <li>
-            <RouterLink @click="handleClick" style="text-decoration: none;" to="/my-projects">{{ $t('my-projects') }}</RouterLink>
+            <RouterLink @click="handleClick" class="navlink" to="/my-projects">{{ $t('my-projects') }}</RouterLink>
           </li>
           <li>
-            <RouterLink @click="handleClick" style="text-decoration: none;" to="/about">{{ $t('about') }}</RouterLink>
+            <RouterLink @click="handleClick" class="navlink" to="/about">{{ $t('about') }}</RouterLink>
           </li>
         </ul>
       </nav>
@@ -71,8 +71,7 @@ defineProps({
 }
 
 aside {
-  background: linear-gradient(135deg, #0f3f3c 80%, #0f5a57 100%);
-  opacity: 0.98;
+  background: var(--bg-mid);
   position: fixed;
   height: 100vh;
   top: 0;
@@ -100,7 +99,7 @@ aside > button {
   all: unset;
   align-self: flex-end;
   cursor: pointer;
-  color: #5fd4c6;
+  color: var(--accent-2);
   background: rgba(15, 90, 87, 0.18);
   border: 1px solid rgba(95, 212, 198, 0.45);
   border-radius: 10px;
@@ -111,17 +110,6 @@ aside > button {
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-
-aside > button:hover {
-  background: #5fd4c6;
-  color: #0f3f3c;
-  border-color: transparent;
-}
-
-aside > button:focus-visible {
-  outline: 2px solid #5fd4c6;
-  outline-offset: 2px;
 }
 
 nav ul {
@@ -149,8 +137,7 @@ li a {
 
 li a:hover,
 li a.router-link-exact-active {
-  background: #5fd4c6;
-  color: #0f3f3c;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.25), rgba(6, 182, 212, 0.2));
 }
 
 .sidebar-enter-active {
