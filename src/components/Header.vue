@@ -34,7 +34,7 @@ function handleClick() {
 
 <style scoped>
 header {
-  background: rgba(15, 15, 22, 0.85);
+  background: var(--bg-deep);
   padding: 0.75rem calc(1rem + env(safe-area-inset-right));
   padding-left: calc(1rem + env(safe-area-inset-left));
   top: 0;
@@ -60,7 +60,7 @@ header {
   a {
     text-decoration: none;
     border-radius: 6px;
-    color: #fff;
+    color: var(--text-secondary);
     padding: 0.25rem 0.5rem;
     line-height: 1.2;
   }
@@ -113,7 +113,7 @@ header {
     display: flex;
     gap: 8px;
     padding: 10px 16px;
-    background: rgba(15, 15, 22, 0.85);
+    background: var(--bg-taskbar);
     backdrop-filter: blur(20px) saturate(1.5);
     -webkit-backdrop-filter: blur(20px) saturate(1.5);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -163,7 +163,6 @@ header {
     cursor: pointer;
     padding: 0.5rem;
     background: rgba(255, 255, 255, 0.08);
-    color: var(--text-primary);
     font: inherit;
     font-size: 0.8rem;
     font-weight: 700;

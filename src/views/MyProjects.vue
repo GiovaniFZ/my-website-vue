@@ -78,7 +78,7 @@ onMounted(async () => {
 
   .project-anchor {
     text-decoration: none;
-    color: inherit;
+    color: var(--text-secondary);
     display: block;
   }
 
@@ -92,6 +92,7 @@ onMounted(async () => {
     overflow: hidden;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 10px;
   }
 
   .project-name {
@@ -135,7 +136,7 @@ onMounted(async () => {
   align-items: center;
   gap: 0.4rem;
   margin-top: 0.5rem;
-  color: #fff;
+  color: var(--text-secondary);
 }
 
 .stars .count {

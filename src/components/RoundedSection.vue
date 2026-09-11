@@ -78,7 +78,7 @@ defineProps({
         >
           <div class="window-dots">
             <button class="dot dot-red" type="button" aria-label="Fechar janela" title="Fechar" @pointerdown.stop @click="closeWindow">
-              <span aria-hidden="true">&times;</span>
+              <span class="dot-icon" aria-hidden="true">&times;</span>
             </button>
             <button
               class="dot dot-yellow"
@@ -89,10 +89,10 @@ defineProps({
               @pointerdown.stop
               @click="toggleMinimize"
             >
-              <span aria-hidden="true">&minus;</span>
+              <span class="dot-icon" aria-hidden="true">&minus;</span>
             </button>
             <button class="dot dot-green" type="button" aria-label="Expandir janela" title="Expandir" disabled @pointerdown.stop>
-              <span aria-hidden="true">+</span>
+              <span class="dot-icon" aria-hidden="true">+</span>
             </button>
         </div>
         <span class="window-title">~/{{subtitle.toLowerCase().replace(" ", "_")}}.md — zsh</span>
@@ -144,7 +144,7 @@ defineProps({
     display: flex;
     align-items: center;
     padding: 14px 18px;
-    background: rgba(0,0,0,0.3);
+    background: var(--window-titlebar);
     border-bottom: 1px solid rgba(255,255,255,0.05);
     gap: 10px;
     touch-action: none;
@@ -183,10 +183,14 @@ defineProps({
     font-size: 0.75rem;
     line-height: 1;
     cursor: default;
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     transition: transform 0.2s;
+  }
+
+  .dot-icon {
+    color: var(--bg-deep);
   }
 
   .dot span {
@@ -198,12 +202,27 @@ defineProps({
     line-height: 1.2;
   }
 
-  .dot-red { background: #ff5f57; }
-  .dot-yellow { background: #febc2e; }
-  .dot-green { background: #28c840; }
-
   .dot:hover {
-    transform: scale(1.2);
+    cursor: pointer;
+  }
+
+  .dot-red { 
+    background: #ff5f57;
+  }
+  .dot-yellow { 
+    background: #febc2e;
+   }
+  .dot-green { 
+    background: #28c840;
+  }
+  .dot-red:hover {
+    box-shadow: 0 4px 16px #ff5f57;
+  }
+  .dot-yellow:hover {
+    box-shadow: 0 4px 16px #febc2e;
+  }
+  .dot-green:hover {
+    box-shadow: 0 4px 16px #28c840;
   }
 
 
@@ -239,7 +258,7 @@ defineProps({
     font-size: clamp(32px, 8vw, 120px);
     font-weight: 800;
     line-height: 1.12;
-    background: linear-gradient(135deg, #fff 0%, #a5b5b5 50%, #3aedc3 100%);
+    background: linear-gradient(135deg, var(--hero-text) 0%, #a5b5b5 50%, #3aedc3 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;

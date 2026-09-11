@@ -2,14 +2,17 @@
   --bg-deep: #0a0a0f;
   --bg-mid: #13131a;
   --bg-window: rgba(20, 20, 28, 0.75);
+  --bg-taskbar: rgba(15, 15, 22, 0.85);
   --border-glow: rgba(99, 102, 241, 0.35);
   --accent-1: #7c3aed;
   --accent-2: #06b6d4;
   --accent-3: #f59e0b;
   --accent-4: #10b981;
   --text-primary: #e7e7ee;
+  --hero-text: #fff;
   --text-secondary: #8a8a9a;
   --text-dim: #4a4a5a;
+  --window-titlebar: rgba(0,0,0,0.3);
   --danger: #ef4444;
   font-family: 'Red Hat Display', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -27,7 +30,14 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    color:rgb(255, 255, 255);
+    color:#000;
+    --bg-deep: #fff;
+    --bg-window: #f5f5f5;
+    --text-primary: #000;
+    --text-secondary: #8a8a9a;
+    --hero-text: #000;
+    --bg-taskbar: #fff;
+    --window-titlebar: #e1dfe1;
   }
   button {
     background-color: #f9f9f9;
