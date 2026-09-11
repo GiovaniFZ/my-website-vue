@@ -57,7 +57,6 @@ const skills: Skill[] = [
 
 <style>
 .mySwiper {
-  background-color: #0d3b38;
   border-radius: 8px;
   padding: 1rem;
   width: 100%;

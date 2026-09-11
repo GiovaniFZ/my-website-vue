@@ -1,11 +1,23 @@
 :root {
+  --bg-deep: #0a0a0f;
+  --bg-mid: #13131a;
+  --bg-window: rgba(20, 20, 28, 0.75);
+  --border-glow: rgba(99, 102, 241, 0.35);
+  --accent-1: #7c3aed;
+  --accent-2: #06b6d4;
+  --accent-3: #f59e0b;
+  --accent-4: #10b981;
+  --text-primary: #e7e7ee;
+  --text-secondary: #8a8a9a;
+  --text-dim: #4a4a5a;
+  --danger: #ef4444;
   font-family: 'Red Hat Display', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background: #e7fbf9;
+  color: rgba(255, 255, 255, 0.71);
+  background: var(--bg-deep);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -45,6 +57,6 @@
 }
 
 .error-message {
-  color: #ff6b6b;
+  color: var(--danger);
   padding: 10px 0;
 }

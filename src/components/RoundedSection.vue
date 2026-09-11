@@ -1,4 +1,46 @@
 <script setup>
+import { ref } from 'vue';
+
+const isClosed = ref(false);
+const isMinimized = ref(false);
+const windowPosition = ref({ x: 0, y: 0 });
+const isDragging = ref(false);
+let dragStart = { x: 0, y: 0 };
+let positionAtDragStart = { x: 0, y: 0 };
+
+function closeWindow() {
+  isClosed.value = true;
+}
+
+function toggleMinimize() {
+  isMinimized.value = !isMinimized.value;
+}
+
+function startDrag(event) {
+  if (event.button !== undefined && event.button !== 0) return;
+
+  dragStart = { x: event.clientX, y: event.clientY };
+  positionAtDragStart = { ...windowPosition.value };
+  isDragging.value = true;
+  event.currentTarget.setPointerCapture?.(event.pointerId);
+}
+
+function dragWindow(event) {
+  if (!isDragging.value) return;
+
+  windowPosition.value = {
+    x: positionAtDragStart.x + event.clientX - dragStart.x,
+    y: positionAtDragStart.y + event.clientY - dragStart.y
+  };
+}
+
+function stopDrag(event) {
+  if (!isDragging.value) return;
+
+  isDragging.value = false;
+  event.currentTarget.releasePointerCapture?.(event.pointerId);
+}
+
 defineProps({
   title: {
     type: String,
@@ -19,19 +61,55 @@ defineProps({
 </script>
 
 <template>
-  <div class="wrapper">
+  <div
+    v-if="!isClosed"
+    class="wrapper"
+    :class="{ 'is-dragging': isDragging }"
+    :style="{ transform: `translate(${windowPosition.x}px, ${windowPosition.y}px)` }"
+  >
     <div class="container">
-      <div class="same-line">
+        <div
+          class="window-titlebar"
+          :class="{ 'is-dragging': isDragging }"
+          @pointerdown="startDrag"
+          @pointermove="dragWindow"
+          @pointerup="stopDrag"
+          @pointercancel="stopDrag"
+        >
+          <div class="window-dots">
+            <button class="dot dot-red" type="button" aria-label="Fechar janela" title="Fechar" @pointerdown.stop @click="closeWindow">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <button
+              class="dot dot-yellow"
+              type="button"
+              :aria-label="isMinimized ? 'Restaurar janela' : 'Minimizar janela'"
+              :title="isMinimized ? 'Restaurar' : 'Minimizar'"
+              :aria-expanded="!isMinimized"
+              @pointerdown.stop
+              @click="toggleMinimize"
+            >
+              <span aria-hidden="true">&minus;</span>
+            </button>
+            <button class="dot dot-green" type="button" aria-label="Expandir janela" title="Expandir" disabled @pointerdown.stop>
+              <span aria-hidden="true">+</span>
+            </button>
+        </div>
+        <span class="window-title">~/{{subtitle.toLowerCase().replace(" ", "_")}}.md — zsh</span>
+      </div>
+      <div v-if="!isMinimized" class="window-content">
+        <div class="same-line">
         <img v-if="hasImage && image" :src="image" alt="Section icon" />
         <v-icon scale="7" v-else :name="iconName" aria-hidden="true" />
-        <div v-if="subtitle" class="title-container">
+        <div v-if="subtitle" class="hero-title">
           <span v-if="title" class="greeting">{{ title }}</span>
-          <h1>{{ subtitle }}</h1>
+          <span class="hero-name">{{ subtitle }}</span>
         </div>
         <h1 v-else>{{ title }}</h1>
-      </div>
-      <div class="slot-content">
-        <slot></slot>
+        </div>
+        <div class="slot-content">
+          <slot></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -62,23 +140,77 @@ defineProps({
   }
 }
 
-.wrapper {
-  background-color: #0f5a57;
-  border-radius: 8px;
-  padding: 3rem;
-  box-sizing: border-box;
-  margin: 5rem 0.75rem 2rem 0.75rem;
-  animation: colors 800ms ease-out both;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+.window-titlebar {
+    display: flex;
+    align-items: center;
+    padding: 14px 18px;
+    background: rgba(0,0,0,0.3);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    gap: 10px;
+    touch-action: none;
+  }
+
+.wrapper {    
+    background: var(--bg-window);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+    transition: transform 0.4s, box-shadow 0.4s;
+    margin: 5rem 0.75rem 2rem 0.75rem;
 
   @media(max-width: 870px) {
     padding: 1rem;
     margin: 6rem 0.75rem 1.25rem 0.75rem;
   }
 }
+
+.wrapper.is-dragging {
+  transition: none;
+}
 .container {
   margin: 0 auto;
 }
+
+  .window-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    all: unset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    font-size: 0.75rem;
+    line-height: 1;
+    cursor: default;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+
+  .dot span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    line-height: 1.2;
+  }
+
+  .dot-red { background: #ff5f57; }
+  .dot-yellow { background: #febc2e; }
+  .dot-green { background: #28c840; }
+
+  .dot:hover {
+    transform: scale(1.2);
+  }
+
 
 .same-line {
   display: flex;
@@ -97,18 +229,6 @@ defineProps({
 
 }
 
-.title-container {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  text-align: center;
-  animation: goToTop 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
-
-  @media(max-width: 870px) {
-    margin: 0.5rem 0 0 0;
-  }
-}
-
 .greeting {
   font-size: 2.5rem;
   line-height: 1.05;
@@ -120,21 +240,28 @@ defineProps({
   }
 }
 
-h1 {
-  font-size: 6rem;
-  margin: 0;
-  text-align: center;
-  animation: goToTop 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
-
-  @media(max-width: 870px) {
-    font-size: 3rem;
-    margin: 0;
+.hero-title {
+    font-size: clamp(32px, 8vw, 120px);
+    font-weight: 800;
+    line-height: 1.12;
+    background: linear-gradient(135deg, #fff 0%, #a5b5b5 50%, #3aedc3 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: title-shine 8s ease-in-out infinite;
+    background-size: 150% 150%;
+    overflow-wrap: anywhere;
   }
-}
 
-.title-container h1 {
-  margin: 0;
-}
+.hero-name {
+    display: block;
+    background: linear-gradient(90deg, var(--accent-2), var(--accent-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 300% 100%;
+    animation: name-flow 6s linear infinite;
+  }
 
 .slot-content {
   display: block;
@@ -149,11 +276,6 @@ h1 {
   max-width: 100%;
   min-width: 0;
   overflow: hidden;
-}
-
-.greeting+h1 {
-  margin-top: 0.25rem;
-  line-height: 1.05;
 }
 
 :slotted(p) {
