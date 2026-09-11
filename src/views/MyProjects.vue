@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import { onMounted, ref } from 'vue';
 import RoundedSection from '../components/RoundedSection.vue';
 import { githubApi } from '../lib/api/github';
 import type { GithubRepo } from '../interfaces/github';
-import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
@@ -16,11 +14,15 @@ const error = ref(false);
 
 onMounted(async () => {
   try {
-    const request = await githubApi.get('/repos');
+    const params =
+      {
+        per_page: 8,
+        sort: 'updated',
+      }
+    const request = await githubApi.get('/repos', params);
     repos.value = request.data;
   } catch (err) {
     console.error('Erro ao buscar dados:', err);
-    //error.value = true;
   } finally {
     loading.value = false;
   }
@@ -36,34 +38,21 @@ onMounted(async () => {
     <div v-else-if="error" class="error-message">
       <p>{{ $t('repositoryLoadError') }}</p>
     </div>
-    <swiper
+    <div
       v-else
       :key="repos.length"
-      class="projectsSwiper"
-      :space-between="10"
-      :navigation="true"
-      :pagination="{ clickable: true }"
-      :modules="[Navigation, Pagination, Autoplay]"
-      :breakpoints="{
-        1200: { slidesPerView: 5 },
-        700: { slidesPerView: 3 },
-        500: { slidesPerView: 1 },
-      }"
-      :autoplay="{
-        delay: 3000,
-        disableOnInteraction: false
-      }">
-      <swiper-slide v-for="value in repos" :key="value.id">
-        <a class="roundedLink" :href="value.html_url" target="_blank" rel="noopener noreferrer">
-          <p>{{ value.name }}</p>
-          <p>{{ value.description }}</p>
+      class="projects-grid">
+      <div class="project-card" v-for="value in repos" :key="value.id">
+        <a class="project-anchor" :href="value.html_url" target="_blank" rel="noopener noreferrer">
+          <p class="project-name">{{ value.name }}</p>
+          <p class="project-desc">{{ value.description }}</p>
           <div class="stars">
             <v-icon name="bi-star-fill" />
             <span class="count">{{ value.stargazers_count }}</span>
           </div>
         </a>
-      </swiper-slide>
-    </swiper>
+      </div>
+    </div>
   </RoundedSection>
 </template>
 
@@ -81,73 +70,76 @@ onMounted(async () => {
     grid-template-columns: 1fr;
   }
 }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+  }
 
-.roundedLink {
-  display: block;
-  border-radius: 12px;
-  text-decoration: none;
-  background-color: #ffffff;
-  color: #0f2f30;
-  padding: 1rem;
-  height: 15rem;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-}
+  .project-anchor {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
 
-.roundedLink:hover {
-  background-color: #a3fff4;
-}
+.project-card {
+    background: linear-gradient(135deg, rgba(124, 58, 237, 0.25), rgba(6, 182, 212, 0.2));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
 
-.roundedLink:focus-visible {
-  outline: 2px solid #5fd4c6;
-  outline-offset: 3px;
-}
+  .project-name {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
 
-.roundedLink p {
-  margin: 0;
-  font-size: 20px;
-}
+  .project-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
 
-.roundedLink p+p {
-  margin-top: 0.35rem;
-}
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s;
+  }
 
-.roundedLink p:first-child {
-  font-weight: 700;
-  color: #0e3a3b;
-}
+  .project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--border-glow);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(124, 58, 237, 0.2);
+  }
 
-.roundedLink p:nth-child(2) {
-  color: #475569;
-}
-
-.roundedLink p:last-child {
-  color: #0f5a57;
-  font-weight: 600;
-}
-
-.roundedLink+.roundedLink {
-  margin-top: 0.75rem;
-}
+  .project-card:hover::before {
+    transform: scaleX(1);
+  }
 
 .stars {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   margin-top: 0.5rem;
-  color: #0f5a57;
+  color: #fff;
 }
 
 .stars .count {
   font-weight: 600;
-}
-
-.projectsSwiper {
-  border-radius: 8px;
-  width: 100%;
-  max-width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-  padding: 4rem;
 }
 
 .swiper-button-next,
@@ -167,11 +159,6 @@ onMounted(async () => {
 }
 
 @media (max-width: 870px) {
-  .projectsSwiper {
-    padding: 0.75rem;
-    border-radius: 6px;
-  }
-
   .swiper-button-next,
   .swiper-button-prev {
     display: none;
