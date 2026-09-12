@@ -3,6 +3,7 @@ import { ref } from 'vue';
 
 const isClosed = ref(false);
 const isMinimized = ref(false);
+const isMaximized = ref(false);
 const windowPosition = ref({ x: 0, y: 0 });
 const isDragging = ref(false);
 let dragStart = { x: 0, y: 0 };
@@ -10,6 +11,10 @@ let positionAtDragStart = { x: 0, y: 0 };
 
 function closeWindow() {
   isClosed.value = true;
+}
+
+function toggleMaximize() {
+  isMaximized.value = !isMaximized.value;
 }
 
 function toggleMinimize() {
@@ -27,6 +32,11 @@ function startDrag(event) {
 
 function dragWindow(event) {
   if (!isDragging.value) return;
+  const tooMuchInTheTop = event.clientY <= 98;
+
+  if (tooMuchInTheTop) {
+    return;
+  }
 
   windowPosition.value = {
     x: positionAtDragStart.x + event.clientX - dragStart.x,
@@ -64,8 +74,12 @@ defineProps({
   <div
     v-if="!isClosed"
     class="wrapper"
-    :class="{ 'is-dragging': isDragging }"
-    :style="{ transform: `translate(${windowPosition.x}px, ${windowPosition.y}px)` }"
+    :class="{ 'is-dragging': isDragging, 'is-maximized': isMaximized }"
+    :style="{ 
+      transform: isMaximized ? `translate(0px, -15px)` : `translate(${windowPosition.x}px, ${windowPosition.y}px)`,
+      width: isMaximized ? '100%' : '80%',
+      height: isMaximized ? 'calc(100vh - 10.5rem)' : 'auto'
+      }"
   >
     <div class="container">
         <div
@@ -91,7 +105,13 @@ defineProps({
             >
               <span class="dot-icon" aria-hidden="true">&minus;</span>
             </button>
-            <button class="dot dot-green" type="button" aria-label="Expandir janela" title="Expandir" disabled @pointerdown.stop>
+            <button class="dot dot-green" 
+              type="button"
+              :aria-label="isMaximized ? 'Restaurar janela' : 'Expandir janela'"
+              :title="isMaximized ? 'Restaurar' : 'Expandir'"
+              @pointerdown.stop
+              @click="toggleMaximize"
+            >
               <span class="dot-icon" aria-hidden="true">+</span>
             </button>
         </div>
@@ -159,12 +179,18 @@ defineProps({
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
     transition: transform 0.4s, box-shadow 0.4s;
-    margin: 5rem 0.75rem 6rem 0.75rem;
+    margin: 5rem auto;
 }
 
 .wrapper.is-dragging {
   transition: none;
 }
+
+.window-content {
+  max-height: calc(100vh - 14rem);
+  overflow-y: auto;
+}
+
 .container {
   margin: 0 auto;
 }
