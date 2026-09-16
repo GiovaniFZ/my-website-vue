@@ -32,11 +32,6 @@ function startDrag(event) {
 
 function dragWindow(event) {
   if (!isDragging.value) return;
-  const tooMuchInTheTop = event.clientY <= 98;
-
-  if (tooMuchInTheTop) {
-    return;
-  }
 
   windowPosition.value = {
     x: positionAtDragStart.x + event.clientX - dragStart.x,
