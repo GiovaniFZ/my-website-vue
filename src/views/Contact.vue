@@ -30,8 +30,8 @@ import RoundedSection from '../components/RoundedSection.vue';
 <template>
   <RoundedSection :subtitle="$t('socialNetworks')" :title="$t('my')" :iconName="'io-person'">
     <div class="contact-icons">
-      <a href="https://t.me/givfnz2" target="_blank" rel="noopener noreferrer">
-        <v-icon name="bi-telegram" scale="5" />
+      <a href="https://www.linkedin.com/in/giovani-furigo-finazzi-3b1337264/" target="_blank" rel="noopener noreferrer">
+        <v-icon name="fa-linkedin" scale="5" />
       </a>
       <a href="https://github.com/GiovaniFZ" target="_blank" rel="noopener noreferrer">
         <v-icon name="bi-github" scale="5" />
