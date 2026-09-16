@@ -6,12 +6,19 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import RoundedSection from '../components/RoundedSection.vue';
 import { Navigation, Pagination } from 'swiper/modules';
+import { onMounted, ref } from 'vue';
 
 type Skill = {
   name: string;
   icon: string;
   link?: string;
 };
+
+const iconScale = ref(5)
+
+function getIconScale() {
+  iconScale.value = window.innerWidth < 768 ? 3 : 5
+}
 
 const skills: Skill[] = [
   { name: 'Android', icon: 'co-android', link: 'https://android.com/' },
@@ -23,11 +30,18 @@ const skills: Skill[] = [
   { name: 'React', icon: 'co-react', link: 'https://react.dev/' },
   { name: 'Windows', icon: 'co-windows', link: 'https://www.microsoft.com/windows' },
 ];
+
+onMounted(() => {
+  console.log(iconScale)
+  getIconScale()
+  window.addEventListener('resize', getIconScale)
+})
+
 </script>
 
 <template>
   <RoundedSection :subtitle="$t('skills')" :title="$t('some-of-2')" :iconName="'bi-lightbulb-fill'">
-    <swiper class="mySwiper" :slides-per-view="5" :space-between="8" :navigation="true"
+    <swiper class="mySwiper" :slides-per-view="5" :navigation="true"
       :pagination="{ clickable: true }" :modules="[Navigation, Pagination]" :breakpoints="{
         1200: { slidesPerView: 5 },
         1000: { slidesPerView: 4 },
@@ -43,7 +57,7 @@ const skills: Skill[] = [
           target="_blank"
           rel="noopener noreferrer"
         >
-          <v-icon class="swiperIcon" :name="skill.icon" scale="5" />
+          <v-icon class="swiperIcon" :name="skill.icon" :scale="iconScale"/>
           <p>{{ skill.name }}</p>
         </a>
         <div v-else class="skill-card">
