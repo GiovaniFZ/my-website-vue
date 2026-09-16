@@ -13,12 +13,11 @@ import RoundedSection from '../components/RoundedSection.vue';
 .contact-icons a {
   color: inherit;
   text-decoration: none;
+  transition: color 0.2s ease-in;
 }
 
 .contact-icons a:hover {
   color: #5fd4c6;
-  transform: scale(1.1);
-  transition: all 0.3s ease;
 }
 
 @media (max-width: 870px) {

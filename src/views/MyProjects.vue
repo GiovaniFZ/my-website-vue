@@ -127,10 +127,6 @@ onMounted(async () => {
     box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(124, 58, 237, 0.2);
   }
 
-  .project-card:hover::before {
-    transform: scaleX(1);
-  }
-
 .stars {
   display: inline-flex;
   align-items: center;

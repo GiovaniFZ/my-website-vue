@@ -65,12 +65,12 @@ const skills: Skill[] = [
   overflow: hidden;
 }
 
-.swiperIcon {
-  transition: transform 0.3s ease;
+.swiperIcon:hover {
+    color: #5fd4c6;
 }
 
-.swiperIcon:hover {
-  transform: scale(1.2);
+.swiperIcon {
+    transition: color 0.2s ease-in;
 }
 
 .swiper-slide {
