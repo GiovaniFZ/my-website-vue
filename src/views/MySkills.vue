@@ -6,19 +6,14 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import RoundedSection from '../components/RoundedSection.vue';
 import { Navigation, Pagination } from 'swiper/modules';
-import { onMounted, ref } from 'vue';
+import { onMounted } from 'vue';
+import { getIconScale, iconScale } from '../utils/get-icon-scale.ts';
 
 type Skill = {
   name: string;
   icon: string;
   link?: string;
 };
-
-const iconScale = ref(5)
-
-function getIconScale() {
-  iconScale.value = window.innerWidth < 768 ? 3 : 5
-}
 
 const skills: Skill[] = [
   { name: 'Android', icon: 'co-android', link: 'https://android.com/' },
@@ -32,7 +27,6 @@ const skills: Skill[] = [
 ];
 
 onMounted(() => {
-  console.log(iconScale)
   getIconScale()
   window.addEventListener('resize', getIconScale)
 })
