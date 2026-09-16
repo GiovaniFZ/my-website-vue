@@ -276,7 +276,7 @@ defineProps({
 }
 
 .hero-title {
-    font-size: clamp(32px, 8vw, 120px);
+    font-size: clamp(32px, 6vw, 120px);
     font-weight: 800;
     line-height: 1.12;
     background: linear-gradient(135deg, var(--hero-text) 0%, #a5b5b5 50%, #3aedc3 100%);
