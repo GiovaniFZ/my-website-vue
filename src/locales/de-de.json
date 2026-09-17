@@ -3,7 +3,7 @@
     "greeting": "Hallo,",
     "introduction": "Ich bin Giovani",
     "aboutWebText": "Hallo, dies ist meine persönliche Website. Ich habe sie mit Vue 3 und TypeScript erstellt und verwende Vite als Build-Tool. Diese Website präsentiert meine Fähigkeiten, Projekte und Interessen in der Entwicklung.",
-    "aboutMeText": "Ich bin Softwareentwickler, arbeite derzeit als IT-Analyst und lebe in Brasilien! Ich liebe das Programmieren, interessiere mich leidenschaftlich für Webentwicklung und bin immer offen dafür, zu Open-Source-Projekten beizutragen.",
+    "aboutMeText": "Ich bin Softwareentwickler, arbeite derzeit als Entwickler und lebe in Brasilien! Ich liebe das Programmieren, interessiere mich leidenschaftlich für Webentwicklung und bin immer offen dafür, zu Open-Source-Projekten beizutragen.",
     "aboutThis": "Über",
     "about": "Über mich",
     "website": "Diese Website",
