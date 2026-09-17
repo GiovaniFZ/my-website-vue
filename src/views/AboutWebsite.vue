@@ -6,6 +6,6 @@ import Package from '../../package.json'
 <template>
   <RoundedSection :title="$t('about')" :subtitle="$t('website')" :iconName="'bi-code-slash'" isFirst>
     <p>{{ $t('aboutWebText') }}</p>
-    <p>Version: {{ Package.version }}</p>
+    <p>{{ $t('version') }}: {{ Package.version }}</p>
   </RoundedSection>
 </template>
