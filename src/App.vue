@@ -5,6 +5,26 @@ import './style.css'
 </script>
 
 <template>
-  <Header />
+  <Header @toggle="toggleTheme" />
   <RouterView />
 </template>
+
+<script lang="ts">
+export default {
+  data() {
+    return {
+      theme: 'light'
+    }
+  },
+  watch: {
+    theme(theme) {
+      document.documentElement.dataset.theme = theme
+    }
+  },
+  methods: {
+    toggleTheme() {
+      this.theme = this.theme === 'light' ? 'dark' : 'light'
+    }
+  }
+}
+</script>

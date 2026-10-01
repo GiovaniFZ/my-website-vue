@@ -15,6 +15,7 @@ function handleClick() {
   <Sidebar :is-open="isOpen" @close="isOpen = false" />
   <header>
     <button class="menu-icon" @click="handleClick" aria-label="Open menu">≡</button>
+    <!-- <button @click="toggle">Botão</button> -->
     <div class="first-anchor">Giv's Website</div>
     <nav>
       <RouterLink class="taskbar-btn" to="/">{{ $t('home') }}</RouterLink>
@@ -206,3 +207,9 @@ header {
     border-radius: 2px;
   }
 </style>
+
+<script lang="ts">
+export default {
+  props: ["toggle"],
+};
+</script>
